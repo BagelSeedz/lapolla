@@ -1,0 +1,44 @@
+body {
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: rgb(3, 3, 130);
+}
+.group-header {
+    display: flex;
+    text-align: center;
+    font-size: 30px;
+    justify-content: center;
+    background-color: blue;
+}
+.group-letter {
+    margin-right: 10%;
+    margin-top: 20px;
+}
+.group-teams-outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+}
+.group-teams-inner-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 80%;
+    height: 80%;
+    background-color: lime;
+}
+.header-team {
+    color: black;
+    background-color: white;
+    border-radius: 15%;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-team img {
+    height: 24px;
+    margin-right: 10px;
+    background-color: white;
+    border: 1px solid rgba(94, 94, 94, 0.179);
+}
