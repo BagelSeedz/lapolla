@@ -3,6 +3,11 @@ body {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: rgb(3, 3, 130);
 }
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .group-header {
     display: flex;
     text-align: center;
@@ -15,9 +20,6 @@ body {
     margin-top: 20px;
 }
 .group-teams-outer-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 60%;
 }
 .group-teams-inner-container {
@@ -32,13 +34,32 @@ body {
     background-color: white;
     border-radius: 15%;
     margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .header-team img {
     height: 24px;
     margin-right: 10px;
     background-color: white;
     border: 1px solid rgba(94, 94, 94, 0.179);
+}
+.matchday-title {
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 35px;
+    border-radius: 15%;
+}
+.matchdays-container {
+    font-size: 30px;
+    /* margin-bottom: 10px; */
+}
+.matchdays-item {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.score-input {
+    width: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
 }

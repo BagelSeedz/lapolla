@@ -10,7 +10,7 @@ class GroupHeader extends React.Component {
                     Group
                     <h1>{this.props.group}</h1>
                 </div>
-                <div className='group-teams-outer-container'>
+                <div className='group-teams-outer-container center'>
                     <div className='group-teams-inner-container'>
                         {this.props.teams.map((team, index) => {
                             return(

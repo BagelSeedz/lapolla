@@ -1,81 +1,8 @@
 import React from 'react'
 import './lapolla.css'
 import GroupHeader from './GroupHeader';
-
-const groups = {
-    A: [
-        'Mexico',
-        'South Africa',
-        'Korea Republic',
-        'TBD'
-    ],
-    B: [
-        'Canada',
-        'TBD',
-        'Qatar',
-        'Switzerland'
-    ],
-    C: [
-        'Brazil',
-        'Morocco',
-        'Haiti',
-        'Scotland'
-    ],
-    D: [
-        'USA',
-        'Paraguay',
-        'Australia',
-        'TBD'
-    ],
-    E: [
-        'Germany',
-        'Curaçao',
-        "Côte d'Ivoire",
-        'Ecuador'
-    ],
-    F: [
-        'Netherlands',
-        'Japan',
-        'TBD',
-        'Tunisia'
-    ],
-    G: [
-        'Belgium',
-        'Egypt',
-        'IR Iran',
-        'New Zealand'
-    ],
-    H: [
-        'Spain',
-        'Cabo Verde',
-        'Saudia Arabia',
-        'Uruguay'
-    ],
-    I: [
-        'France',
-        'Senegal',
-        'TBD',
-        'Norway'
-    ],
-    J: [
-        'Argentina',
-        'Algeria',
-        'Austria',
-        'Jordan'
-    ],
-    K: [
-        'Portugal',
-        'TBD',
-        'Uzbekistan',
-        'Colombia'
-    ],
-    L: [
-        'England',
-        'Croatia',
-        'Ghana',
-        'Panama'
-    ]
-}
+import Matchday from './Matchday';
+import groups from './Groups.json'
 
 class ScoreImportPage extends React.Component {
     constructor(props) {
@@ -88,17 +15,18 @@ class ScoreImportPage extends React.Component {
 
 
     render() {
+        const teams = groups[this.state.group];
+        const match1Data = {
+            matchNum: 1,
+            team1: teams[0],
+            team2: teams[1],
+            matchTime: "1"
+        } 
+
         return (
             <>
-                <GroupHeader group={this.state.group} teams={groups[this.state.group]}/>
-                <div>
-                    <div>
-                        a
-                    </div>
-                    <div>
-                        a
-                    </div>
-                </div>
+                <GroupHeader group={this.state.group} teams={teams}/>
+                <Matchday teams={teams}/>
             </>
         )
     }
