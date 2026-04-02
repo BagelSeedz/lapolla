@@ -5,13 +5,13 @@ class Match extends React.Component {
     render() {
         return (
             <div className='center matchdays-container'>
-                <p className='matchdays-item'>11 June 15:00</p>
-                <Team className='matchdays-item' team="Team 1"/>
+                <p className='matchdays-item'>{this.props.matchData.time}</p>
+                <Team className='matchdays-item' team={this.props.team1}/>
                 <input className='matchdays-item score-input'/>
                 <p>v</p>
                 <input className='matchdays-item score-input'/>
-                <Team className='matchdays-item' team="Team 2"/>
-                <p className='matchdays-item'>Mexico City</p>
+                <Team className='matchdays-item' team={this.props.team2}/>
+                <p className='matchdays-item'>{this.props.matchData.place}</p>
             </div>
         )
     }
