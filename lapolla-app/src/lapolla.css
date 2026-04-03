@@ -3,6 +3,14 @@ body {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: rgb(3, 3, 130);
 }
+button {
+    border-radius: 15%;
+    background-color: rgb(34, 255, 0);
+    color: black;
+    font-size: 20px;
+    height: 40px;
+    margin-inline: 20px;
+}
 .center {
     display: flex;
     align-items: center;
@@ -62,4 +70,7 @@ body {
     font-size: 20px;
     font-weight: 700;
     text-align: center;
+}
+.full-height {
+    height: 100vh;
 }
