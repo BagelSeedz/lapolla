@@ -14,7 +14,6 @@ class ScoreImportPage extends React.Component {
         }
     }
 
-
     render() {
         const teams = groups[this.state.group];
         const matchData = matchesJSON[this.state.group];
