@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 import './lapolla.css'
 import GroupHeader from './GroupHeader';
 import Matchday from './Matchday';
@@ -32,7 +33,12 @@ class ScoreImportPage extends React.Component {
     }
 
     handleSubmit() {
-        console.log("Submit scores");
+        axios.post('http://127.0.0.1:8000/api/tasks/', {
+            title: 'Test Tasking it',
+            completed: true,
+        }).then((response) => {
+            console.log('Scores submitted successfully:', response.data);
+        });
     }
 
     render() {
