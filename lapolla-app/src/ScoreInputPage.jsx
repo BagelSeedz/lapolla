@@ -5,6 +5,7 @@ import GroupHeader from './GroupHeader';
 import Matchday from './Matchday';
 import groups from './Groups.json'
 import matchesJSON from './Matches.json'
+import SubmitConfirmation from './SubmitConfirmation';
 
 const groupOrder = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 
@@ -13,7 +14,8 @@ class ScoreImportPage extends React.Component {
         super(props);
 
         this.state = {
-            groupIndex: 0
+            groupIndex: 0,
+            showSubmitConfirmation: false
         }
 
         this.handleNextGroup = this.handleNextGroup.bind(this);
@@ -38,6 +40,13 @@ class ScoreImportPage extends React.Component {
             completed: true,
         }).then((response) => {
             console.log('Scores submitted successfully:', response.data);
+        });
+    }
+
+    showSubmitConfirmation() {
+        this.setState({ 
+            groupIndex: this.state.groupIndex,
+            showSubmitConfirmation: true 
         });
     }
 
@@ -72,6 +81,7 @@ class ScoreImportPage extends React.Component {
                         <button onClick={() => this.handleSubmit()}>Submit Scores</button>
                     }
                 </div>
+                <SubmitConfirmation/>
             </>
         )
     }
