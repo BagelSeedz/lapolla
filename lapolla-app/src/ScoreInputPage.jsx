@@ -19,7 +19,10 @@ class ScoreImportPage extends React.Component {
         }
 
         this.handleNextGroup = this.handleNextGroup.bind(this);
+        this.handlePrevGroup = this.handlePrevGroup.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.showSubmitConfirmation = this.showSubmitConfirmation.bind(this);
+        this.hideSubmitConfirmation = this.hideSubmitConfirmation.bind(this);
     }
 
     handleNextGroup() {
@@ -47,6 +50,13 @@ class ScoreImportPage extends React.Component {
         this.setState({ 
             groupIndex: this.state.groupIndex,
             showSubmitConfirmation: true 
+        });
+    }
+
+    hideSubmitConfirmation() {
+        this.setState({ 
+            groupIndex: this.state.groupIndex,
+            showSubmitConfirmation: false 
         });
     }
 
@@ -78,10 +88,10 @@ class ScoreImportPage extends React.Component {
                     {
                         this.state.groupIndex < groupOrder.length - 1 ?
                         <button onClick={() => this.handleNextGroup()}>Go to Group {groupOrder[this.state.groupIndex + 1]} →</button> :
-                        <button onClick={() => this.handleSubmit()}>Submit Scores</button>
+                        <button onClick={() => this.showSubmitConfirmation()}>Submit Scores</button>
                     }
                 </div>
-                <SubmitConfirmation/>
+                {this.state.showSubmitConfirmation && <SubmitConfirmation onSubmit={this.handleSubmit} onHide={this.hideSubmitConfirmation}/>}
             </>
         )
     }
