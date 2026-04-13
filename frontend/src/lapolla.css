@@ -85,3 +85,11 @@ button {
     top: 25vh;
     left: 25vw;
 }
+.navbar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+    color: white;
+}
