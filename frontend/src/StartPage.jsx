@@ -8,7 +8,7 @@ class StartPage extends React.Component {
         return (
             <>
                 <div className='navbar'>
-                    <a href="http://127.0.0.1:8000/api/login_user">Login</a>
+                    <a href="/#login">Login</a>
                     <a href="http://127.0.0.1:8000/api/register_user">Register</a>
                 </div>
                 <div className='full-height center'>

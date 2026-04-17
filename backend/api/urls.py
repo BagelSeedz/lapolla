@@ -7,6 +7,7 @@ router = DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('csrf/', views.csrf, name='csrf'),
     path('me/', views.me, name='me'),
     path('register_user/', views.register_user, name='register'),
     path('login_user/', views.login_user, name='login'),

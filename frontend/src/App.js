@@ -2,6 +2,7 @@ import React from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import StartPage from "./StartPage";
 import ScoreImportPage from "./ScoreInputPage";
+import LoginPage from "./LoginPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // 1. Get CSRF cookie
+    fetch("http://127.0.0.1:8000/api/csrf/", {
+      credentials: "include"
+    });
+
+    // 2. Then fetch /me
     fetch("http://127.0.0.1:8000/api/me/", {
       credentials: "include"
     })
@@ -43,6 +50,10 @@ class App extends React.Component {
           <Route
             path="/score-input"
             element={<ScoreImportPage user={this.state.user} />}
+          />
+          <Route
+            path="/login"
+            element={<LoginPage user={this.state.user} />}
           />
         </Routes>
       </HashRouter>
