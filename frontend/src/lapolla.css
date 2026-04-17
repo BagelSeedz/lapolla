@@ -93,3 +93,8 @@ button {
     padding: 10px 20px;
     color: white;
 }
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}

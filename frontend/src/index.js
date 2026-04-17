@@ -1,20 +1,13 @@
 import React from 'react';
-import { HashRouter, Route, Routes } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import ScoreImportPage from './ScoreInputPage';
 import reportWebVitals from './reportWebVitals';
-import StartPage from './StartPage';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<StartPage/>}/>
-        <Route path="/score-input" element={<ScoreImportPage/>} />
-      </Routes>
-    </HashRouter>
+    <App />
   </React.StrictMode>
 );
 
