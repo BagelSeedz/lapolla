@@ -6,7 +6,7 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-class LoginPage extends React.Component {
+class SignUpPage extends React.Component {
     constructor(props) {
         super(props);
         
@@ -15,7 +15,7 @@ class LoginPage extends React.Component {
             loading: false
         }
 
-        this.login = this.login.bind(this);
+        this.signup = this.signup.bind(this);
     }
 
     componentDidMount() {
@@ -24,38 +24,45 @@ class LoginPage extends React.Component {
         });
     }
 
-    login(event) {
+    signup(event) {
         event.preventDefault(); // stop page reload
 
         const formData = new FormData(event.target);
+        const username = formData.get("username");
         const email = formData.get("email");
         const password = formData.get("password");
+        const confirmPassword = formData.get("confirm-password")
 
         this.setState({ loading: true, error: null });
 
-        fetch("http://localhost:8000/api/login_user/", {
+        if (password !== confirmPassword) {
+            this.setState({ loading: false, error: "Passwords do not match." });
+            return;
+        }
+
+        fetch("http://localhost:8000/api/register_user/", {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": getCookie("csrftoken")
             },
-            body: JSON.stringify({ "email": email, "password": password })
+            body: JSON.stringify({ username, email, password })
         })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
+            console.log("Server message:", data.message);
             this.setState({ loading: false });
+
             if (!data.success) {
                 this.setState({ error: data.message });
             } else {
                 this.setState({ error: null });
-                this.props.onLogin().then(() => {
-                    window.location.hash = "#/";
-                });
+                window.location.hash = "#/";
             }
         })
-        .catch(error => {
-            this.setState({ loading: false, error: "An error occurred while logging in." });
+        .catch(() => {
+            this.setState({ loading: false, error: "An error occurred while signing up." });
         });
     }
 
@@ -63,14 +70,18 @@ class LoginPage extends React.Component {
         return (
             <div className='full-height center login'>
                 <div>
-                    <h1>Log In</h1>
+                    <h1>Sign Up</h1>
                     {this.state.error != null && <h3>Error: {this.state.error}</h3>}
-                    <form onSubmit={this.login}>
+                    <form onSubmit={this.signup}>
+                        <h4>Username</h4>
+                        <input name="username" type='text' placeholder='Username' />
                         <h4>Email</h4>
                         <input name="email" type='text' placeholder='Email' />
                         <h4>Password</h4>
                         <input name="password" type='password' placeholder='Password' />
-                        <button type="submit">Log In</button>
+                        <h4>Confirm Password</h4>
+                        <input name="confirm-password" type='password' placeholder='Password' />
+                        <button type="submit" disabled={this.state.loading}>Sign Up</button>
                     </form>
                 </div>
             </div>
@@ -78,4 +89,4 @@ class LoginPage extends React.Component {
     }
 }
 
-export default LoginPage;
+export default SignUpPage;

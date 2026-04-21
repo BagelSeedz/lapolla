@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import StartPage from "./StartPage";
 import ScoreImportPage from "./ScoreInputPage";
 import LoginPage from "./LoginPage";
+import SignUpPage from "./SignUpPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,16 +12,18 @@ class App extends React.Component {
       user: null,
       loading: true
     };
+
+    this.updateUser = this.updateUser.bind(this);
   }
 
   componentDidMount() {
     // 1. Get CSRF cookie
-    fetch("http://127.0.0.1:8000/api/csrf/", {
+    fetch("http://localhost:8000/api/csrf/", {
       credentials: "include"
     });
 
     // 2. Then fetch /me
-    fetch("http://127.0.0.1:8000/api/me/", {
+    fetch("http://localhost:8000/api/me/", {
       credentials: "include"
     })
       .then(res => res.json())
@@ -34,6 +37,19 @@ class App extends React.Component {
         this.setState({ loading: false });
       });
   }
+
+  updateUser() {
+    return fetch("http://localhost:8000/api/me/", {
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ user: data });
+        console.log(data);
+        return data;
+      });
+  }
+
 
   render() {
     if (this.state.loading) {
@@ -53,7 +69,11 @@ class App extends React.Component {
           />
           <Route
             path="/login"
-            element={<LoginPage user={this.state.user} />}
+            element={<LoginPage onLogin={this.updateUser}/>}
+          />
+          <Route
+            path="/register"
+            element={<SignUpPage/>}
           />
         </Routes>
       </HashRouter>

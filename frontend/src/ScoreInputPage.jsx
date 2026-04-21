@@ -38,7 +38,7 @@ class ScoreImportPage extends React.Component {
     }
 
     handleSubmit() {
-        axios.post('http://127.0.0.1:8000/api/tasks/', {
+        axios.post('http://localhost:8000/api/tasks/', {
             title: 'Test Tasking it',
             completed: true,
         }).then((response) => {

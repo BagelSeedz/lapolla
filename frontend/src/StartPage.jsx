@@ -9,7 +9,7 @@ class StartPage extends React.Component {
             <>
                 <div className='navbar'>
                     <a href="/#login">Login</a>
-                    <a href="http://127.0.0.1:8000/api/register_user">Register</a>
+                    <a href="/#register">Register</a>
                 </div>
                 <div className='full-height center'>
                     <button>
