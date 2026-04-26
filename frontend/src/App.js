@@ -61,7 +61,7 @@ class App extends React.Component {
         <Routes>
           <Route
             path="/"
-            element={<StartPage user={this.state.user} />}
+            element={<StartPage user={this.state.user} onLogout={this.updateUser}/>}
           />
           <Route
             path="/score-input"

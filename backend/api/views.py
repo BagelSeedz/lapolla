@@ -70,3 +70,9 @@ def login_user(request):
 
     login(request, user)
     return JsonResponse({"success": True})
+
+def logout_user(request):
+    if request.method == "POST":
+        logout(request)
+        return JsonResponse({"success": True})
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
