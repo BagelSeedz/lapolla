@@ -20,10 +20,12 @@ class Matchday extends React.Component {
                 
                 <Match team1={team1}
                        team2={team2}
-                       matchData={this.props.matchData[0]}/>
+                       matchData={this.props.matchData[0]}
+                       onEditScore={this.props.onEditScore}/>
                 <Match team1={team3}
                        team2={team4}
-                       matchData={this.props.matchData[1]}/>
+                       matchData={this.props.matchData[1]}
+                       onEditScore={this.props.onEditScore}/>
             </>
         )
     }

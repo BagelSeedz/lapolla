@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Prediction
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie
 import json
+
 
 @ensure_csrf_cookie
 def csrf(request):
@@ -76,3 +78,19 @@ def logout_user(request):
         logout(request)
         return JsonResponse({"success": True})
     return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+def predict(request):
+    if request.method == "POST":
+        data: dict = json.loads(request.body)
+
+        for match_id, pred in data:
+            Prediction.objects.update_or_create(
+                user=request.user,
+                match_id=match_id,
+                defaults={
+                    "home_score": pred["home_score"],
+                    "away_score": pred["away_score"]
+                }
+            )
+
+        return JsonResponse({"status": "ok"})

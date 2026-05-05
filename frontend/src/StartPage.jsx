@@ -50,7 +50,10 @@ class StartPage extends React.Component {
                 <div className='navbar'>
                     {this.props.user.authenticated 
                         ? (
-                            <button onClick={this.logout}>Log Out</button>
+                            <>
+                                <p>Hello {this.props.user.username}!</p>
+                                <button onClick={this.logout}>Log Out</button>
+                            </>
                         )
                         : (
                             <>
