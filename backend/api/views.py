@@ -80,7 +80,23 @@ def logout_user(request):
     return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
 
 def predict(request):
-    if request.method == "POST":
+    if request.method == "GET":
+        # Get all predictions for this user
+        preds = Prediction.objects.filter(user=request.user)
+
+        # Build the response in the same shape as POST expects
+        data = {
+            str(p.match_id): {
+                "home_score": p.home_score,
+                "away_score": p.away_score
+            }
+            for p in preds
+        }
+
+        return JsonResponse(data)
+
+    elif request.method == "POST":
+        print(request.body)
         data = json.loads(request.body)
 
         for match_id, pred in data.items():
@@ -94,3 +110,5 @@ def predict(request):
             )
 
         return JsonResponse({"success": True})
+
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)

@@ -14,7 +14,7 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-class ScoreImportPage extends React.Component {
+class ScoreInputPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -30,12 +30,44 @@ class ScoreImportPage extends React.Component {
         this.showSubmitConfirmation = this.showSubmitConfirmation.bind(this);
         this.hideSubmitConfirmation = this.hideSubmitConfirmation.bind(this);
         this.editScore = this.editScore.bind(this);
+        this.normalizePredictions = this.normalizePredictions.bind(this);
     }
 
     componentDidMount() {
+        // Get csrf cookie
         fetch("http://localhost:8000/api/csrf/", {
             credentials: "include"
         });
+
+        // Load existing predictions
+        fetch("http://localhost:8000/api/predict/", {
+            credentials: "include"
+        })
+        .then(res => res.json())
+        .then(data => {
+            const normalized = this.normalizePredictions(data);
+            this.setState({ predictions: normalized });
+        });
+    }
+
+    normalizePredictions(predsFromServer) {
+        const normalized = { ...predsFromServer };
+
+        // Loop through ALL matches in ALL groups
+        for (const group of groupOrder) {
+            const matches = matchesJSON[group];
+            for (const match of matches) {
+                const id = match.Id; // or match.id depending on your JSON
+                if (!normalized[id]) {
+                    normalized[id] = {
+                        home_score: 0,
+                        away_score: 0
+                    };
+                }
+            }
+        }
+
+        return normalized;
     }
 
     handleNextGroup() {
@@ -88,13 +120,12 @@ class ScoreImportPage extends React.Component {
             predictions: {
                 ...prevState.predictions,
                 [id]: {
-                    home_score,
-                    away_score
+                    home_score: home_score ?? 0,
+                    away_score: away_score ?? 0
                 }
             }
         }));
     }
-
 
     render() {
         const group = groupOrder[this.state.groupIndex];
@@ -108,16 +139,19 @@ class ScoreImportPage extends React.Component {
                           teams={teams}
                           matchOrder={[0, 1, 2, 3]}
                           matchData={[matchData[0], matchData[1]]}
+                          predictions={this.state.predictions}
                           onEditScore={this.editScore}/>
                 <Matchday day={2}
                           teams={teams}
                           matchOrder={[3, 1, 0, 2]}
                           matchData={[matchData[2], matchData[3]]}
+                          predictions={this.state.predictions}
                           onEditScore={this.editScore}/>
                 <Matchday day={3}
                           teams={teams}
                           matchOrder={[3, 0, 1, 2]}
                           matchData={[matchData[4], matchData[5]]}
+                          predictions={this.state.predictions}
                           onEditScore={this.editScore}/>
                 <div className='center'>
                     {
@@ -136,4 +170,4 @@ class ScoreImportPage extends React.Component {
     }
 }
 
-export default ScoreImportPage;
+export default ScoreInputPage;

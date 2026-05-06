@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import StartPage from "./StartPage";
-import ScoreImportPage from "./ScoreInputPage";
+import ScoreInputPage from "./ScoreInputPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 
@@ -65,7 +65,7 @@ class App extends React.Component {
           />
           <Route
             path="/score-input"
-            element={<ScoreImportPage user={this.state.user} />}
+            element={<ScoreInputPage user={this.state.user} />}
           />
           <Route
             path="/login"

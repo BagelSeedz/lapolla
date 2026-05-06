@@ -5,11 +5,6 @@ class Match extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            team1Score: 0,
-            team2Score: 0
-        };
-
         this.updateTeam1Score = this.updateTeam1Score.bind(this);
         this.updateTeam2Score = this.updateTeam2Score.bind(this);
     }
@@ -17,34 +12,26 @@ class Match extends React.Component {
     updateTeam1Score(e) {
         const value = Number(e.target.value);
 
-        this.setState(
-            { team1Score: value },
-            () => {
-                this.props.onEditScore(
-                    this.props.matchData.id,
-                    this.state.team1Score,
-                    this.state.team2Score
-                );
-            }
+        this.props.onEditScore(
+            this.props.matchData.id,
+            value,
+            this.props.preds.away_score
         );
     }
 
     updateTeam2Score(e) {
         const value = Number(e.target.value);
 
-        this.setState(
-            { team2Score: value },
-            () => {
-                this.props.onEditScore(
-                    this.props.matchData.id,
-                    this.state.team1Score,
-                    this.state.team2Score
-                );
-            }
+        this.props.onEditScore(
+            this.props.matchData.id,
+            this.props.preds.home_score,
+            value
         );
     }
 
     render() {
+        const preds = this.props.preds || { home_score: 0, away_score: 0 };
+
         return (
             <div className='center matchdays-container'>
                 <p className='matchdays-item'>{this.props.matchData.time}</p>
@@ -54,7 +41,7 @@ class Match extends React.Component {
                 <input
                     className='matchdays-item score-input'
                     type="number"
-                    value={this.state.team1Score}
+                    value={preds.home_score}
                     onChange={this.updateTeam1Score}
                 />
 
@@ -63,7 +50,7 @@ class Match extends React.Component {
                 <input
                     className='matchdays-item score-input'
                     type="number"
-                    value={this.state.team2Score}
+                    value={preds.away_score}
                     onChange={this.updateTeam2Score}
                 />
 
