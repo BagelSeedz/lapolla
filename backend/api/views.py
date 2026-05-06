@@ -81,16 +81,16 @@ def logout_user(request):
 
 def predict(request):
     if request.method == "POST":
-        data: dict = json.loads(request.body)
+        data = json.loads(request.body)
 
-        for match_id, pred in data:
+        for match_id, pred in data.items():
             Prediction.objects.update_or_create(
                 user=request.user,
-                match_id=match_id,
+                match_id=int(match_id),
                 defaults={
                     "home_score": pred["home_score"],
                     "away_score": pred["away_score"]
                 }
             )
 
-        return JsonResponse({"status": "ok"})
+        return JsonResponse({"success": True})

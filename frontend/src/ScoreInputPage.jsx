@@ -58,15 +58,13 @@ class ScoreImportPage extends React.Component {
                 "Content-Type": "application/json",
                 "X-CSRFToken": getCookie("csrftoken")
             },
-            body: this.state.predictions
+            body: JSON.stringify(this.state.predictions)
         })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
                 // Tell App to refresh user state
-                this.props.onLogout().then(() => {
-                    window.location.hash = "#/";
-                });
+                window.location.hash = "#/";
             } else {
                 console.log("Failed to submit. An error occurred.")
             }
