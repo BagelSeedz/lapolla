@@ -4,6 +4,13 @@ import StartPage from "./StartPage";
 import ScoreInputPage from "./ScoreInputPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
+import Navbar from "./Navbar";
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +21,7 @@ class App extends React.Component {
     };
 
     this.updateUser = this.updateUser.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +58,27 @@ class App extends React.Component {
       });
   }
 
+  logout() {
+    fetch("http://localhost:8000/api/logout_user/", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken")
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            // Tell App to refresh user state
+            this.updateUser().then(() => {
+                window.location.hash = "#/";
+            });
+        } else {
+            console.log("Failed to log out. An error occurred.")
+        }
+    });
+  }
 
   render() {
     if (this.state.loading) {
@@ -57,26 +86,29 @@ class App extends React.Component {
     }
 
     return (
-      <HashRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<StartPage user={this.state.user} onLogout={this.updateUser}/>}
-          />
-          <Route
-            path="/score-input"
-            element={<ScoreInputPage user={this.state.user} />}
-          />
-          <Route
-            path="/login"
-            element={<LoginPage onLogin={this.updateUser}/>}
-          />
-          <Route
-            path="/register"
-            element={<SignUpPage/>}
-          />
-        </Routes>
-      </HashRouter>
+      <>
+        <Navbar user={this.state.user} logout={this.logout}/>
+        <HashRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={<StartPage user={this.state.user}/>}
+            />
+            <Route
+              path="/score-input"
+              element={<ScoreInputPage user={this.state.user} />}
+            />
+            <Route
+              path="/login"
+              element={<LoginPage onLogin={this.updateUser}/>}
+            />
+            <Route
+              path="/register"
+              element={<SignUpPage/>}
+            />
+          </Routes>
+        </HashRouter>
+      </>
     );
   }
 }

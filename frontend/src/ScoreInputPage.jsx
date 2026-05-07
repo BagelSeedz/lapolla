@@ -57,7 +57,7 @@ class ScoreInputPage extends React.Component {
         for (const group of groupOrder) {
             const matches = matchesJSON[group];
             for (const match of matches) {
-                const id = match.Id; // or match.id depending on your JSON
+                const id = match.id;
                 if (!normalized[id]) {
                     normalized[id] = {
                         home_score: 0,

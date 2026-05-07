@@ -72,7 +72,7 @@ button {
     text-align: center;
 }
 .full-height {
-    height: 100vh;
+    height: 90vh;
 }
 .submit-confirmation {
     text-align: center;
@@ -87,7 +87,7 @@ button {
 }
 .navbar {
     display: flex;
-    justify-content: right;
+    justify-content: space-between; /* pushes left and right apart */
     align-items: center;
     background-color: black;
     padding: 10px 20px;
