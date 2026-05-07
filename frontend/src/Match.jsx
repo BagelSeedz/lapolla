@@ -33,30 +33,30 @@ class Match extends React.Component {
         const preds = this.props.preds || { home_score: 0, away_score: 0 };
 
         return (
-            <div className='center matchdays-container'>
-                <p className='matchdays-item'>{this.props.matchData.time}</p>
+            <div className='matchdays-container'>
+                <p>{this.props.matchData.time}</p>
 
-                <Team className='matchdays-item' team={this.props.team1}/>
+                <Team team={this.props.team1}/>
 
                 <input
-                    className='matchdays-item score-input'
+                    className='score-input'
                     type="number"
                     value={preds.home_score}
                     onChange={this.updateTeam1Score}
                 />
 
-                <p>v</p>
+                <p className="versus">v</p>
 
                 <input
-                    className='matchdays-item score-input'
+                    className='score-input'
                     type="number"
                     value={preds.away_score}
                     onChange={this.updateTeam2Score}
                 />
 
-                <Team className='matchdays-item' team={this.props.team2}/>
+                <Team team={this.props.team2}/>
 
-                <p className='matchdays-item'>{this.props.matchData.place}</p>
+                <p>{this.props.matchData.place}</p>
             </div>
         );
     }

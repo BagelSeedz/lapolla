@@ -58,15 +58,22 @@ button {
     border-radius: 15%;
 }
 .matchdays-container {
+    display: grid;
+    grid-template-columns:
+        300px   /* time */
+        300px   /* team 1 */
+        40px    /* home score */
+        30px    /* v */
+        40px    /* away score */
+        300px   /* team 2 */
+        300px;  /* place */
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
     font-size: 30px;
-    /* margin-bottom: 10px; */
-}
-.matchdays-item {
-    margin-left: 2%;
-    margin-right: 2%;
+    margin: 10px 0;
 }
 .score-input {
-    width: 30px;
     font-size: 20px;
     font-weight: 700;
     text-align: center;
@@ -107,4 +114,7 @@ button {
 }
 .login h4 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.versus {
+    text-align: center;
 }
