@@ -52,6 +52,7 @@ button {
 .matchdays-container {
     display: grid;
     grid-template-columns:
+        100px   /* match id */
         300px   /* time */
         300px   /* team 1 */
         40px    /* home score */
