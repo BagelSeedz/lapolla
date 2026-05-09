@@ -17,6 +17,10 @@ button {
     justify-content: center;
 }
 .group-header {
+    position: sticky;
+    top: 1px;
+    z-index: 10;
+
     display: flex;
     text-align: center;
     font-size: 30px;
