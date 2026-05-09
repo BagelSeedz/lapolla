@@ -4,6 +4,7 @@ import GroupHeader from './GroupHeader';
 import Matchday from './Matchday';
 import groups from './Groups.json'
 import matchesJSON from './Matches.json'
+import teamsJSON from './Teams.json'
 import SubmitConfirmation from './SubmitConfirmation';
 
 const groupOrder = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
@@ -12,6 +13,14 @@ function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function getTeamsFromIds(teamIds) {
+    var teams = [];
+    teamIds.forEach(id => {
+        teams.push(teamsJSON[id].name)
+    });
+    return teams;
 }
 
 class ScoreInputPage extends React.Component {
@@ -129,7 +138,7 @@ class ScoreInputPage extends React.Component {
 
     render() {
         const group = groupOrder[this.state.groupIndex];
-        const teams = groups[group];
+        const teams = getTeamsFromIds(groups[group]);
         const matchData = matchesJSON[group];
 
         return (
