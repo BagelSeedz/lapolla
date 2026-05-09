@@ -4,8 +4,6 @@ import Match from './Match';
 
 class Matchday extends React.Component {
     render() {
-        const day = this.props.day;
-
         const matchOrder = this.props.matchOrder;
         const teams = this.props.teams;
         const team1 = teams[matchOrder[0]];
@@ -22,10 +20,6 @@ class Matchday extends React.Component {
 
         return (
             <>
-                <div className='center'>
-                    <div className='matchday-title'>Matchday {day}</div>
-                </div>
-                
                 <Match
                     key={match1Id}
                     team1={team1}

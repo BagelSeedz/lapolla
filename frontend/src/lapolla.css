@@ -49,14 +49,6 @@ button {
     background-color: white;
     border: 1px solid rgba(94, 94, 94, 0.179);
 }
-.matchday-title {
-    background-color: white;
-    color: black;
-    text-align: center;
-    margin-top: 20px;
-    font-size: 35px;
-    border-radius: 15%;
-}
 .matchdays-container {
     display: grid;
     grid-template-columns:

@@ -135,20 +135,17 @@ class ScoreInputPage extends React.Component {
         return (
             <>
                 <GroupHeader group={group} teams={teams}/>
-                <Matchday day={1}
-                          teams={teams}
+                <Matchday teams={teams}
                           matchOrder={[0, 1, 2, 3]}
                           matchData={[matchData[0], matchData[1]]}
                           predictions={this.state.predictions}
                           onEditScore={this.editScore}/>
-                <Matchday day={2}
-                          teams={teams}
+                <Matchday teams={teams}
                           matchOrder={[3, 1, 0, 2]}
                           matchData={[matchData[2], matchData[3]]}
                           predictions={this.state.predictions}
                           onEditScore={this.editScore}/>
-                <Matchday day={3}
-                          teams={teams}
+                <Matchday teams={teams}
                           matchOrder={[3, 0, 1, 2]}
                           matchData={[matchData[4], matchData[5]]}
                           predictions={this.state.predictions}
