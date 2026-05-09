@@ -5,12 +5,18 @@ class Match extends React.Component {
     constructor(props) {
         super(props);
 
+        this.sanitize = this.sanitize.bind(this);
         this.updateTeam1Score = this.updateTeam1Score.bind(this);
         this.updateTeam2Score = this.updateTeam2Score.bind(this);
     }
 
+    sanitize(value) {
+        const num = parseInt(value, 10);
+        return isNaN(num) ? 0 : num;
+    }
+
     updateTeam1Score(e) {
-        const value = Number(e.target.value);
+        const value = this.sanitize(e.target.value);
 
         this.props.onEditScore(
             this.props.matchData.id,
@@ -20,7 +26,7 @@ class Match extends React.Component {
     }
 
     updateTeam2Score(e) {
-        const value = Number(e.target.value);
+        const value = this.sanitize(e.target.value);
 
         this.props.onEditScore(
             this.props.matchData.id,
@@ -42,7 +48,7 @@ class Match extends React.Component {
 
                 <input
                     className='score-input'
-                    type="number"
+                    type="text"
                     value={preds.home_score}
                     onChange={this.updateTeam1Score}
                 />
@@ -51,7 +57,7 @@ class Match extends React.Component {
 
                 <input
                     className='score-input'
-                    type="number"
+                    type="text"
                     value={preds.away_score}
                     onChange={this.updateTeam2Score}
                 />
