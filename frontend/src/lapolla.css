@@ -68,7 +68,10 @@ button {
     justify-content: center;
     column-gap: 10px;
     font-size: 30px;
-    margin: 10px 0;
+    margin-top: 10px;
+}
+.matchdays-container p{
+    margin: 0;
 }
 .score-input {
     font-size: 20px;
@@ -114,4 +117,29 @@ button {
 }
 .versus {
     text-align: center;
+}
+.team-shortcut {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .small-hide {
+        display: none;
+    }
+    .team-shortcut {
+        display: inline;
+    }
+    .matchdays-container {
+        display: grid;
+        grid-template-columns:
+            150px   /* team 1 */
+            40px    /* home score */
+            30px    /* v */
+            40px    /* away score */
+            150px;   /* team 2 */
+        align-items: center;
+        justify-content: center;
+        column-gap: 10px;
+        font-size: 30px;
+    }
 }

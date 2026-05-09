@@ -40,9 +40,9 @@ class Match extends React.Component {
 
         return (
             <div className='matchdays-container'>
-                <p>{this.props.matchData.id}</p>
+                <p className="small-hide">{this.props.matchData.id}</p>
 
-                <p>{this.props.matchData.time}</p>
+                <p className="small-hide">{this.props.matchData.time}</p>
 
                 <Team team={this.props.team1}/>
 
@@ -64,7 +64,7 @@ class Match extends React.Component {
 
                 <Team team={this.props.team2}/>
 
-                <p>{this.props.matchData.place}</p>
+                <p className="small-hide">{this.props.matchData.place}</p>
             </div>
         );
     }

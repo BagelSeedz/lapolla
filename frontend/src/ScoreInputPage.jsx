@@ -18,7 +18,7 @@ function getCookie(name) {
 function getTeamsFromIds(teamIds) {
     var teams = [];
     teamIds.forEach(id => {
-        teams.push(teamsJSON[id].name)
+        teams.push(teamsJSON[id])
     });
     return teams;
 }

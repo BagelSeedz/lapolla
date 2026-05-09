@@ -3,10 +3,15 @@ import './lapolla.css'
 
 class Team extends React.Component {
     render() {
+        const flag = this.props.team.flag;
+        const name = this.props.team.name;
+        const shortcut = this.props.team.shortcut;
+
         return (
             <div className='header-team center'>
-                <img src={'flags/' + this.props.team + '.png'} alt={this.props.team + ' flag'}/>
-                {this.props.team}
+                <img src={flag} alt={name + ' flag'} />
+                <span className="small-hide">{name}</span>
+                <span className="team-shortcut">{shortcut}</span>
             </div>
         )
     }
