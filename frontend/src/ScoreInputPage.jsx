@@ -137,6 +137,10 @@ class ScoreInputPage extends React.Component {
     }
 
     render() {
+        // Go to login if no user
+        if (!this.props.user.authenticated)
+            window.location.hash = "login";
+
         const group = groupOrder[this.state.groupIndex];
         const teams = getTeamsFromIds(groups[group]);
         const matchData = matchesJSON[group];
@@ -174,7 +178,7 @@ class ScoreInputPage extends React.Component {
                         <button onClick={() => this.showSubmitConfirmation()}>Submit Scores</button>
                     }
                 </div>
-                
+
                 {this.state.showSubmitConfirmation && <SubmitConfirmation onSubmit={this.handleSubmit} onHide={this.hideSubmitConfirmation}/>}
             </>
         )
