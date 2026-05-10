@@ -1,6 +1,7 @@
 body {
     color: white;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family:sans-serif;
+    font-weight: bold;
     background-color: rgb(3, 3, 130);
 }
 button {

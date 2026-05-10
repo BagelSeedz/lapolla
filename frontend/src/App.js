@@ -4,6 +4,7 @@ import StartPage from "./StartPage";
 import ScoreInputPage from "./ScoreInputPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
+import RulesPage from "./RulesPage";
 import Navbar from "./Navbar";
 
 function getCookie(name) {
@@ -97,6 +98,10 @@ class App extends React.Component {
             <Route
               path="/score-input"
               element={<ScoreInputPage user={this.state.user} />}
+            />
+            <Route
+              path="/rules"
+              element={<RulesPage/>}
             />
             <Route
               path="/login"
