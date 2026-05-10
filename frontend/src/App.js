@@ -109,7 +109,7 @@ class App extends React.Component {
             />
             <Route
               path="/register"
-              element={<SignUpPage/>}
+              element={<SignUpPage onLogin={this.updateUser}/>}
             />
           </Routes>
         </HashRouter>

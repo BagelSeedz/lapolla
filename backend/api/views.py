@@ -43,7 +43,21 @@ def register_user(request):
             email=email,
             password=password
         )
+        
+        # Authenticate newly created user
+        authenticated_user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        # Log them in
+        
+        if authenticated_user is not None:
+            login(request, authenticated_user)
+
         return JsonResponse({'success': True})
+
     except Exception as e:
         return JsonResponse({'success': False, 'message': str(e)})
 

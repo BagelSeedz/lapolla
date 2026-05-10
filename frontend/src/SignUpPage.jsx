@@ -58,7 +58,9 @@ class SignUpPage extends React.Component {
                 this.setState({ error: data.message });
             } else {
                 this.setState({ error: null });
-                window.location.hash = "#/";
+                this.props.onLogin().then(() => {
+                    window.location.hash = "#/";
+                });
             }
         })
         .catch(() => {
