@@ -39,33 +39,39 @@ class Match extends React.Component {
         const preds = this.props.preds || { home_score: 0, away_score: 0 };
 
         return (
-            <div className='matchdays-container'>
-                <p className="small-hide">{this.props.matchData.id}</p>
+            <>
+                <div className="center">
+                    <p className="large-hide no-margin">{this.props.matchData.time}</p>
+                </div>
+                
+                <div className='matchdays-container'>
+                    <p className="small-hide">{this.props.matchData.id}</p>
 
-                <p className="small-hide">{this.props.matchData.time}</p>
+                    <p className="small-hide">{this.props.matchData.time}</p>
 
-                <Team team={this.props.team1}/>
+                    <Team team={this.props.team1}/>
 
-                <input
-                    className='score-input'
-                    type="text"
-                    value={preds.home_score}
-                    onChange={this.updateTeam1Score}
-                />
+                    <input
+                        className='score-input'
+                        type="text"
+                        value={preds.home_score}
+                        onChange={this.updateTeam1Score}
+                    />
 
-                <p className="versus">v</p>
+                    <p className="versus">v</p>
 
-                <input
-                    className='score-input'
-                    type="text"
-                    value={preds.away_score}
-                    onChange={this.updateTeam2Score}
-                />
+                    <input
+                        className='score-input'
+                        type="text"
+                        value={preds.away_score}
+                        onChange={this.updateTeam2Score}
+                    />
 
-                <Team team={this.props.team2}/>
+                    <Team team={this.props.team2}/>
 
-                <p className="small-hide">{this.props.matchData.place}</p>
-            </div>
+                    <p className="small-hide">{this.props.matchData.place}</p>
+                </div>
+            </>
         );
     }
 }

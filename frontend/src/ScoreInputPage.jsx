@@ -144,6 +144,9 @@ class ScoreInputPage extends React.Component {
         return (
             <>
                 <GroupHeader group={group} teams={teams}/>
+
+                <br className='large-hide'/>
+
                 <Matchday teams={teams}
                           matchOrder={[0, 1, 2, 3]}
                           matchData={[matchData[0], matchData[1]]}
@@ -159,6 +162,7 @@ class ScoreInputPage extends React.Component {
                           matchData={[matchData[4], matchData[5]]}
                           predictions={this.state.predictions}
                           onEditScore={this.editScore}/>
+
                 <div className='center'>
                     {
                         this.state.groupIndex > 0 &&
@@ -170,6 +174,7 @@ class ScoreInputPage extends React.Component {
                         <button onClick={() => this.showSubmitConfirmation()}>Submit Scores</button>
                     }
                 </div>
+                
                 {this.state.showSubmitConfirmation && <SubmitConfirmation onSubmit={this.handleSubmit} onHide={this.hideSubmitConfirmation}/>}
             </>
         )

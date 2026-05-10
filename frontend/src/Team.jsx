@@ -11,7 +11,7 @@ class Team extends React.Component {
             <div className='header-team center'>
                 <img src={flag} alt={name + ' flag'} />
                 <span className="small-hide">{name}</span>
-                <span className="team-shortcut">{shortcut}</span>
+                <span className="large-hide">{shortcut}</span>
             </div>
         )
     }

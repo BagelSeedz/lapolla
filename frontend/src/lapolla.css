@@ -24,7 +24,7 @@ button {
 
     display: flex;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     justify-content: center;
     background-color: blue;
 }
@@ -122,12 +122,18 @@ button {
 .team-shortcut {
     display: none;
 }
+.large-hide {
+    display: none;
+}
+.no-margin {
+    margin: 0px;
+}
 
 @media (max-width: 600px) {
     .small-hide {
         display: none;
     }
-    .team-shortcut {
+    .large-hide {
         display: inline;
     }
     .matchdays-container {
@@ -142,5 +148,6 @@ button {
         justify-content: center;
         column-gap: 10px;
         font-size: 30px;
+        margin-top: 0px;
     }
 }
