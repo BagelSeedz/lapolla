@@ -1,17 +1,59 @@
 import React from 'react';
-import './lapolla.css'
+import './lapolla.css';
 
 class StartPage extends React.Component {
-    render() {
-        console.log(this.props.user);
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            firstSheetId: null,
+            loadingSheets: false
+        };
+
+        this.handleStart = this.handleStart.bind(this);
+    }
+
+    componentDidMount() {
+        // If user is logged in, fetch their sheets
+        if (this.props.user.authenticated) {
+            this.setState({ loadingSheets: true });
+
+            fetch("http://localhost:8000/api/sheets/my/", {
+                credentials: "include"
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.sheets.length > 0) {
+                    this.setState({ firstSheetId: data.sheets[0].id });
+                }
+            })
+            .finally(() => {
+                this.setState({ loadingSheets: false });
+            });
+        }
+    }
+
+    handleStart() {
+        if (!this.props.user.authenticated) {
+            // Not logged in → go to login page
+            window.location.hash = "#/login";
+            return;
+        }
+
+        if (this.state.firstSheetId) {
+            // Logged in → go to first sheet
+            window.location.hash = `#/score-input?sheet_id=${this.state.firstSheetId}`;
+        }
+    }
+
+    render() {
         return (
             <div className='full-height center'>
-                <button>
-                    <a href='/#score-input'>Start Score Input</a>
+                <button onClick={this.handleStart}>
+                    Start Score Input
                 </button>
             </div>
-        )
+        );
     }
 }
 

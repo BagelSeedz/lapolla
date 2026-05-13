@@ -106,6 +106,12 @@ button {
     text-decoration: none;
     margin-left: 20px;
 }
+.navbar button {
+    min-width: 90px;      /* prevents shrinking */
+    white-space: nowrap;  /* prevents text wrapping */
+    border-radius: 10px;  /* looks better than 15% */
+    padding: 8px 14px;    /* mobile-friendly */
+}
 .login h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }

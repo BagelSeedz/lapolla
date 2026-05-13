@@ -43,21 +43,26 @@ class ScoreInputPage extends React.Component {
     }
 
     componentDidMount() {
-        // Get csrf cookie
         fetch("http://localhost:8000/api/csrf/", {
             credentials: "include"
         });
 
-        // Load existing predictions
-        fetch("http://localhost:8000/api/predict/", {
+        fetch(`http://localhost:8000/api/predict/?sheet_id=${this.props.sheetId}`, {
             credentials: "include"
         })
         .then(res => res.json())
         .then(data => {
+            if (data.success === false) {
+                // Sheet doesn't exist or doesn't belong to user
+                window.location.hash = "#/"; // or "#/sheets"
+                return;
+            }
+
             const normalized = this.normalizePredictions(data);
             this.setState({ predictions: normalized });
         });
     }
+
 
     normalizePredictions(predsFromServer) {
         const normalized = { ...predsFromServer };
@@ -99,12 +104,14 @@ class ScoreInputPage extends React.Component {
                 "Content-Type": "application/json",
                 "X-CSRFToken": getCookie("csrftoken")
             },
-            body: JSON.stringify(this.state.predictions)
+            body: JSON.stringify({
+                sheet_id: this.props.sheetId,
+                predictions: this.state.predictions
+            })
         })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                // Tell App to refresh user state
                 window.location.hash = "#/";
             } else {
                 console.log("Failed to submit. An error occurred.")
@@ -138,8 +145,12 @@ class ScoreInputPage extends React.Component {
 
     render() {
         // Go to login if no user
-        if (!this.props.user.authenticated)
+        if (!this.props.user.authenticated || !this.props.sheetId)
             window.location.hash = "login";
+
+        if (!this.state.predictions) {
+            return <div>Loading...</div>;
+        }
 
         const group = groupOrder[this.state.groupIndex];
         const teams = getTeamsFromIds(groups[group]);
@@ -150,7 +161,7 @@ class ScoreInputPage extends React.Component {
                 <GroupHeader group={group} teams={teams}/>
 
                 <br className='large-hide'/>
-
+                
                 <Matchday teams={teams}
                           matchOrder={[0, 1, 2, 3]}
                           matchData={[matchData[0], matchData[1]]}

@@ -5,6 +5,12 @@ from . import views
 router = DefaultRouter()
 # router.register(r'users', views.UserViewSet)
 
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
+
+router = DefaultRouter()
+
 urlpatterns = [
     path('', include(router.urls)),
     path('csrf/', views.csrf, name='csrf'),
@@ -13,4 +19,7 @@ urlpatterns = [
     path('login_user/', views.login_user, name='login'),
     path("logout_user/", views.logout_user, name='logout'),
     path("predict/", views.predict, name='predict'),
+    path("sheets/my/", views.my_sheets, name="my_sheets"),
+    path("sheets/other/", views.other_sheets, name="other_sheets"),
+    path("sheets/create/", views.create_sheet, name="create_sheet"),
 ]

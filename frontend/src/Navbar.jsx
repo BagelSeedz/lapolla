@@ -5,7 +5,7 @@ class Navbar extends React.Component {
         super(props);
 
         this.goToHome = this.goToHome.bind(this);
-        this.goToScoreInput = this.goToScoreInput.bind(this);
+        this.goToSheets = this.goToSheets.bind(this);
         this.goToRules = this.goToRules.bind(this);
     }
 
@@ -13,8 +13,8 @@ class Navbar extends React.Component {
         window.location.hash = "#/";
     }
 
-    goToScoreInput() {
-        window.location.hash = "score-input";
+    goToSheets() {
+        window.location.hash = "sheets";
     }
 
     goToRules() {
@@ -24,13 +24,13 @@ class Navbar extends React.Component {
     render() {
         return (
             <div className='navbar'>
-                <div className='center'>
+                <div className='center small-hide'>
                     <p>LaPolla</p>
                 </div>
 
                 <div className='center'>
                     <button onClick={this.goToHome}>Home</button>
-                    <button onClick={this.goToScoreInput}>Score Input</button>
+                    <button onClick={this.goToSheets}>Sheets</button>
                     <button onClick={this.goToRules}>Rules</button>
                 </div>
 

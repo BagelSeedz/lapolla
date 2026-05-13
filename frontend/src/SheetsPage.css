@@ -1,0 +1,119 @@
+/* SheetsPage.css */
+
+.sheets-page {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 40px;
+    box-sizing: border-box;
+}
+
+.sheets-container {
+    width: 450px;
+    min-height: 700px;
+
+    padding: 30px 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.other-title {
+    margin-top: 40px;
+}
+
+.sheet-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.add-sheet-button {
+    margin-top: 20px;
+
+    width: 55px;
+    height: 55px;
+
+    border: 2px solid black;
+
+    font-size: 32px;
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.add-sheet-button:hover {
+    background-color: cyan;
+}
+
+.sheet-card {
+    width: 320px;
+
+    border: 6px solid black;
+    background-color: blue;
+
+    padding: 16px;
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.sheet-info p {
+    margin: 6px 0;
+    font-size: 18px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.sheet-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sheet-button {
+    width: 90px;
+    height: 40px;
+
+    border: 2px solid black;
+
+    font-size: 16px;
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.sheet-button:hover {
+    background-color: cyan;
+}
+
+.sheet-id {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+
+    font-size: 12px;
+    border: 1px solid black;
+    padding: 1px 5px;
+}

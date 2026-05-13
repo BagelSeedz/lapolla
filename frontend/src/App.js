@@ -6,6 +6,7 @@ import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 import RulesPage from "./RulesPage";
 import Navbar from "./Navbar";
+import SheetsPage from "./SheetsPage";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -13,12 +14,21 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+function ScoreInputWrapper(props) {
+  const search = window.location.hash.split("?")[1];
+  const params = new URLSearchParams(search);
+  const sheetId = params.get("sheet_id");
+
+  return <ScoreInputPage {...props} sheetId={sheetId} />;
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: null,
-      loading: true
+      loading: true,
+      selectedSheetId: null,
     };
 
     this.updateUser = this.updateUser.bind(this);
@@ -39,7 +49,8 @@ class App extends React.Component {
       .then(data => {
         this.setState({
           user: data,
-          loading: false
+          loading: false,
+          selectedSheetId: data.firstSheetId || null
         });
       })
       .catch(() => {
@@ -96,8 +107,12 @@ class App extends React.Component {
               element={<StartPage user={this.state.user}/>}
             />
             <Route
+              path="/sheets"
+              element={<SheetsPage user={this.state.user}/>}
+            />
+            <Route
               path="/score-input"
-              element={<ScoreInputPage user={this.state.user} />}
+              element={<ScoreInputWrapper user={this.state.user} />}
             />
             <Route
               path="/rules"

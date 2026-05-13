@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Prediction
+from .models import Prediction, Sheet
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -13,10 +13,12 @@ def csrf(request):
 
 def me(request):
     if request.user.is_authenticated:
+        sheet = Sheet.objects.filter(user=request.user).first()
         return JsonResponse({
             "authenticated": True,
             "username": request.user.username,
-            "email": request.user.email
+            "email": request.user.email,
+            "firstSheetId": sheet.id if sheet else None
         })
     return JsonResponse({"authenticated": False})
 
@@ -38,12 +40,13 @@ def register_user(request):
         return JsonResponse({'success': False, 'message': 'Email not valid.'})
 
     try:
+        # Create user
         user = User.objects.create_user(
             username=username,
             email=email,
             password=password
         )
-        
+
         # Authenticate newly created user
         authenticated_user = authenticate(
             request,
@@ -52,9 +55,14 @@ def register_user(request):
         )
 
         # Log them in
-        
         if authenticated_user is not None:
             login(request, authenticated_user)
+
+        # ⭐ Automatically create their first sheet
+        Sheet.objects.create(
+            user=authenticated_user,
+            code=None  # or simply omit since null=True, blank=True
+        )
 
         return JsonResponse({'success': True})
 
@@ -94,11 +102,20 @@ def logout_user(request):
     return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
 
 def predict(request):
-    if request.method == "GET":
-        # Get all predictions for this user
-        preds = Prediction.objects.filter(user=request.user)
+    if not request.user.is_authenticated:
+        return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
 
-        # Build the response in the same shape as POST expects
+    if request.method == "GET":
+        sheet_id = request.GET.get("sheet_id")
+        if not sheet_id:
+            return JsonResponse({"success": False, "message": "sheet_id required"}, status=400)
+
+        sheet = Sheet.objects.filter(id=sheet_id, user=request.user).first()
+        if not sheet:
+            return JsonResponse({"success": False, "message": "Sheet not found"}, status=404)
+
+        preds = Prediction.objects.filter(sheet=sheet)
+
         data = {
             str(p.match_id): {
                 "home_score": p.home_score,
@@ -110,12 +127,20 @@ def predict(request):
         return JsonResponse(data)
 
     elif request.method == "POST":
-        print(request.body)
-        data = json.loads(request.body)
+        body = json.loads(request.body)
+        sheet_id = body.get("sheet_id")
+        predictions = body.get("predictions")
 
-        for match_id, pred in data.items():
+        if not sheet_id or not predictions:
+            return JsonResponse({"success": False, "message": "sheet_id and predictions required"}, status=400)
+
+        sheet = Sheet.objects.filter(id=sheet_id, user=request.user).first()
+        if not sheet:
+            return JsonResponse({"success": False, "message": "Sheet not found"}, status=404)
+
+        for match_id, pred in predictions.items():
             Prediction.objects.update_or_create(
-                user=request.user,
+                sheet=sheet,
                 match_id=int(match_id),
                 defaults={
                     "home_score": pred["home_score"],
@@ -126,3 +151,46 @@ def predict(request):
         return JsonResponse({"success": True})
 
     return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+def my_sheets(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
+
+    sheets = Sheet.objects.filter(user=request.user)
+
+    data = [
+        {
+            "id": s.id,
+            "owner": request.user.username,
+            "rank": None,      # You can compute this later
+            "submitted": False # Add logic later
+        }
+        for s in sheets
+    ]
+
+    return JsonResponse({"success": True, "sheets": data})
+
+def other_sheets(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
+
+    return JsonResponse({"success": True, "sheets": []})
+
+def create_sheet(request):
+    if request.method != "POST":
+        return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+    if not request.user.is_authenticated:
+        return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
+
+    sheet = Sheet.objects.create(user=request.user)
+
+    return JsonResponse({
+        "success": True,
+        "sheet": {
+            "id": sheet.id,
+            "owner": request.user.username,
+            "rank": None,
+            "submitted": False
+        }
+    })
