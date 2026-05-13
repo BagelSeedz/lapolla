@@ -46,6 +46,10 @@ class SheetsPage extends React.Component {
         });
     }
 
+    goToEditSheet(sheetId) {
+        window.location.hash = `score-input?sheet_id=${sheetId}`;
+    }
+
     createSheet() {
         fetch("http://localhost:8000/api/sheets/create/", {
             method: "POST",
@@ -58,15 +62,17 @@ class SheetsPage extends React.Component {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
+                const newSheet = data.sheet;
+
+                // Add to state
                 this.setState(prev => ({
-                    mySheets: [...prev.mySheets, data.sheet]
+                    mySheets: [...prev.mySheets, newSheet]
                 }));
+
+                // Redirect to edit page
+                this.goToEditSheet(newSheet.id);
             }
         });
-    }
-
-    goToEditSheet(sheetId) {
-        window.location.hash = `score-input?sheet_id=${sheetId}`;
     }
 
     render() {
@@ -87,7 +93,7 @@ class SheetsPage extends React.Component {
                         ))}
                     </div>
 
-                    <button className="add-sheet-button">+</button>
+                    <button className="add-sheet-button" onClick={this.createSheet}>+</button>
                     
                     <h1>_________________</h1>
 
