@@ -15,8 +15,8 @@ class Matchday extends React.Component {
         const match1Id = this.props.matchData[0].id;
         const match2Id = this.props.matchData[1].id;
         const preds = this.props.predictions;
-        const match1Preds = preds[match1Id] || { home_score: 0, away_score: 0 };
-        const match2Preds = preds[match2Id] || { home_score: 0, away_score: 0 };
+        const match1Preds = preds[match1Id] || { home_score: null, away_score: null };
+        const match2Preds = preds[match2Id] || { home_score: null, away_score: null };
 
         return (
             <>

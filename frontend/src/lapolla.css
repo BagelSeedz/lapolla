@@ -140,6 +140,11 @@ button {
 .save-buttons {
     margin-top: 20px;
 }
+.warning h2 {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+}
 
 @media (max-width: 600px) {
     .small-hide {

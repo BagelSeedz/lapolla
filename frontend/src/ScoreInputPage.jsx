@@ -31,7 +31,8 @@ class ScoreInputPage extends React.Component {
             groupIndex: 0,
             showSubmitConfirmation: false,
             predictions: {},
-            submitted: false
+            submitted: false,
+            warning: null
         }
 
         this.handleNextGroup = this.handleNextGroup.bind(this);
@@ -41,6 +42,7 @@ class ScoreInputPage extends React.Component {
         this.hideSubmitConfirmation = this.hideSubmitConfirmation.bind(this);
         this.editScore = this.editScore.bind(this);
         this.normalizePredictions = this.normalizePredictions.bind(this);
+        this.checkForEmpty = this.checkForEmpty.bind(this);
     }
 
     componentDidMount() {
@@ -60,10 +62,10 @@ class ScoreInputPage extends React.Component {
 
             const normalized = this.normalizePredictions(data.predictions);
 
-            this.setState({
+            this.setState((prevState) => ({
                 predictions: normalized,
                 submitted: data.submitted
-            });
+            }));
         });
     }
 
@@ -78,8 +80,8 @@ class ScoreInputPage extends React.Component {
                 const id = match.id;
                 if (!normalized[id]) {
                     normalized[id] = {
-                        home_score: 0,
-                        away_score: 0
+                        home_score: null,
+                        away_score: null
                     };
                 }
             }
@@ -101,6 +103,11 @@ class ScoreInputPage extends React.Component {
     }
 
     handleSave() {
+        if (this.checkForEmpty()) {
+            this.setState({ warning: "You have empty scores. Please fill them in." });
+            return;
+        }
+
         fetch("http://localhost:8000/api/predict/", {
             method: "POST",
             credentials: "include",
@@ -124,6 +131,11 @@ class ScoreInputPage extends React.Component {
     }
 
     showSubmitConfirmation() {
+        if (this.checkForEmpty()) {
+            this.setState({ warning: "You have empty scores. Please fill them in." });
+            return;
+        }
+        
         this.setState((prevState) => ({
             showSubmitConfirmation: true
         })); 
@@ -140,19 +152,35 @@ class ScoreInputPage extends React.Component {
             predictions: {
                 ...prevState.predictions,
                 [id]: {
-                    home_score: home_score ?? 0,
-                    away_score: away_score ?? 0
+                    home_score: home_score ?? null,
+                    away_score: away_score ?? null
                 }
-            }
+            },
+            warning: null
         }));
     }
 
+    checkForEmpty() {
+        const preds = this.state.predictions;
+
+        for (const matchId in preds) {
+            const p = preds[matchId];
+
+            if (p.home_score === null || p.away_score === null) {
+                return true;   // There IS at least one empty score
+            }
+        }
+
+        return false;  // All scores are filled
+    }
+
     render() {
-        // Go to login if no user
         if (!this.props.user.authenticated)
             window.location.hash = "login";
 
-        if (!this.props.sheetId || this.props.submitted)
+        if (!this.props.sheetId || this.props.submitted) {
+            window.location.hash = "sheets"
+        }
 
         if (!this.state.predictions) {
             return <div>Loading...</div>;
@@ -165,6 +193,12 @@ class ScoreInputPage extends React.Component {
         return (
             <>
                 <GroupHeader group={group} teams={teams}/>
+
+                {this.state.warning != null &&
+                    <div className='center warning'>
+                        <h2>{this.state.warning}</h2>
+                    </div>
+                }
 
                 <br className='large-hide'/>
                 

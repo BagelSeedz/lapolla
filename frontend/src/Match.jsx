@@ -12,7 +12,7 @@ class Match extends React.Component {
 
     sanitize(value) {
         const num = parseInt(value, 10);
-        return isNaN(num) ? 0 : num;
+        return isNaN(num) ? null : num;
     }
 
     updateTeam1Score(e) {
@@ -36,7 +36,7 @@ class Match extends React.Component {
     }
 
     render() {
-        const preds = this.props.preds || { home_score: 0, away_score: 0 };
+        const preds = this.props.preds || { home_score: null, away_score: null };
 
         return (
             <>
@@ -53,7 +53,7 @@ class Match extends React.Component {
 
                     <input
                         className='score-input'
-                        type="text"
+                        type="number"
                         value={preds.home_score}
                         onChange={this.updateTeam1Score}
                     />
@@ -62,7 +62,7 @@ class Match extends React.Component {
 
                     <input
                         className='score-input'
-                        type="text"
+                        type="number"
                         value={preds.away_score}
                         onChange={this.updateTeam2Score}
                     />
