@@ -116,7 +116,7 @@ def predict(request):
 
         preds = Prediction.objects.filter(sheet=sheet)
 
-        data = {
+        predictions = {
             str(p.match_id): {
                 "home_score": p.home_score,
                 "away_score": p.away_score
@@ -124,7 +124,11 @@ def predict(request):
             for p in preds
         }
 
-        return JsonResponse(data)
+        return JsonResponse({
+            "success": True,
+            "submitted": sheet.code != None,
+            "predictions": predictions
+        })
 
     elif request.method == "POST":
         body = json.loads(request.body)

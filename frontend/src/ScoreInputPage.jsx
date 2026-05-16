@@ -30,12 +30,13 @@ class ScoreInputPage extends React.Component {
         this.state = {
             groupIndex: 0,
             showSubmitConfirmation: false,
-            predictions: {}
+            predictions: {},
+            submitted: false
         }
 
         this.handleNextGroup = this.handleNextGroup.bind(this);
         this.handlePrevGroup = this.handlePrevGroup.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSave = this.handleSave.bind(this);
         this.showSubmitConfirmation = this.showSubmitConfirmation.bind(this);
         this.hideSubmitConfirmation = this.hideSubmitConfirmation.bind(this);
         this.editScore = this.editScore.bind(this);
@@ -53,13 +54,16 @@ class ScoreInputPage extends React.Component {
         .then(res => res.json())
         .then(data => {
             if (data.success === false) {
-                // Sheet doesn't exist or doesn't belong to user
-                window.location.hash = "#/"; // or "#/sheets"
+                window.location.hash = "#/";
                 return;
             }
 
-            const normalized = this.normalizePredictions(data);
-            this.setState({ predictions: normalized });
+            const normalized = this.normalizePredictions(data.predictions);
+
+            this.setState({
+                predictions: normalized,
+                submitted: data.submitted
+            });
         });
     }
 
@@ -96,7 +100,7 @@ class ScoreInputPage extends React.Component {
         }));
     }
 
-    handleSubmit() {
+    handleSave() {
         fetch("http://localhost:8000/api/predict/", {
             method: "POST",
             credentials: "include",
@@ -112,9 +116,9 @@ class ScoreInputPage extends React.Component {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                window.location.hash = "#/";
+                window.location.hash = "sheets";
             } else {
-                console.log("Failed to submit. An error occurred.")
+                console.log("Failed to save. An error occurred.")
             }
         });
     }
@@ -145,8 +149,10 @@ class ScoreInputPage extends React.Component {
 
     render() {
         // Go to login if no user
-        if (!this.props.user.authenticated || !this.props.sheetId)
+        if (!this.props.user.authenticated)
             window.location.hash = "login";
+
+        if (!this.props.sheetId || this.props.submitted)
 
         if (!this.state.predictions) {
             return <div>Loading...</div>;
@@ -184,13 +190,17 @@ class ScoreInputPage extends React.Component {
                         <button onClick={() => this.handlePrevGroup()}>← Go to Group {groupOrder[this.state.groupIndex - 1]}</button>
                     }
                     {
-                        this.state.groupIndex < groupOrder.length - 1 ?
-                        <button onClick={() => this.handleNextGroup()}>Go to Group {groupOrder[this.state.groupIndex + 1]} →</button> :
-                        <button onClick={() => this.showSubmitConfirmation()}>Submit Scores</button>
+                        this.state.groupIndex < groupOrder.length - 1 &&
+                        <button onClick={() => this.handleNextGroup()}>Go to Group {groupOrder[this.state.groupIndex + 1]} →</button>
                     }
                 </div>
+                <div className='save-buttons center'>
+                    <button onClick={() => this.handleSave()}>Save Scores</button>
+                    <button onClick={() => this.showSubmitConfirmation()}>Submit Scores</button>
+                </div>
+                
 
-                {this.state.showSubmitConfirmation && <SubmitConfirmation onSubmit={this.handleSubmit} onHide={this.hideSubmitConfirmation}/>}
+                {this.state.showSubmitConfirmation && <SubmitConfirmation preds={this.state.predictions} onHide={this.hideSubmitConfirmation}/>}
             </>
         )
     }

@@ -89,17 +89,16 @@ class SheetsPage extends React.Component {
                                 sheet={sheet}
                                 mine={true}
                                 onEdit={this.goToEditSheet}
+                                editable={true}
                             />
                         ))}
                     </div>
-
-                    <button className="add-sheet-button" onClick={this.createSheet}>+</button>
+                    
+                    {this.state.mySheets.length < 2 && <button className="add-sheet-button" onClick={this.createSheet}>+</button>}
                     
                     <h1>_________________</h1>
 
-                    <h2 className="section-title other-title">
-                        Other Sheets
-                    </h2>
+                    <h2 className="section-title other-title">Other Sheets</h2>
 
                     <div className="sheet-list">
                         {this.state.otherSheets.map((sheet) => (
@@ -133,16 +132,11 @@ class Sheet extends React.Component {
                         <span className="label">Rank:</span> {sheet.rank}
                     </p>
 
-                    <p>
-                        <span className="label">Submitted:</span>{' '}
-                        {sheet.submitted ? 'Yes' : 'No'}
-                    </p>
+                    {!sheet.submitted && <button className='sheet-button'>Submit</button>}
                 </div>
 
                 <div className="sheet-actions">
-                    <button className="sheet-button">
-                        View
-                    </button>
+                    <button className="sheet-button">View</button>
 
                     {mine && (
                         <button
@@ -154,9 +148,7 @@ class Sheet extends React.Component {
                     )}
                 </div>
 
-                <div className="sheet-id">
-                    #{sheet.id}
-                </div>
+                <div className="sheet-id">#{sheet.id}</div>
 
             </div>
         );

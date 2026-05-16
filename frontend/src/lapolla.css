@@ -64,7 +64,7 @@ button {
         30px    /* v */
         40px    /* away score */
         300px   /* team 2 */
-        300px;  /* place */
+        350px;  /* place */
     align-items: center;
     justify-content: center;
     column-gap: 10px;
@@ -136,6 +136,9 @@ button {
 }
 .rules {
     width: 50%;
+}
+.save-buttons {
+    margin-top: 20px;
 }
 
 @media (max-width: 600px) {
