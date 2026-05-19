@@ -198,3 +198,11 @@ def create_sheet(request):
             "submitted": False
         }
     })
+
+def submitted_count(request):
+    count = Sheet.objects.exclude(code=None).count()
+
+    return JsonResponse({
+        "success": True,
+        "count": count
+    })

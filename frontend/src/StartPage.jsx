@@ -7,7 +7,8 @@ class StartPage extends React.Component {
 
         this.state = {
             firstSheetId: null,
-            loadingSheets: false
+            loadingSheets: false,
+            submittedCount: 0,
         };
 
         this.handleStart = this.handleStart.bind(this);
@@ -31,6 +32,15 @@ class StartPage extends React.Component {
                 this.setState({ loadingSheets: false });
             });
         }
+
+        // Submitted count
+        fetch("http://localhost:8000/api/sheets/count/")
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                this.setState({submittedCount: data.count})
+            }
+        })
     }
 
     handleStart() {
