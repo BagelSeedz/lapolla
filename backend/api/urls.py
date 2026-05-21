@@ -22,5 +22,7 @@ urlpatterns = [
     path("sheets/my/", views.my_sheets, name="my_sheets"),
     path("sheets/other/", views.other_sheets, name="other_sheets"),
     path("sheets/create/", views.create_sheet, name="create_sheet"),
-    path("sheets/count/", views.submitted_count, name="submitted_count")
+    path("sheets/count/", views.submitted_count, name="submitted_count"),
+    path("sheets/submit/", views.submit, name="submit"),
+    path("sheets/unsubmit/", views.unsubmit, name="unsubmit")
 ]

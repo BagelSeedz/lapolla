@@ -6,6 +6,8 @@ from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie
 import json
 
+with open('api/codes.json', 'r', encoding='utf-8') as f:
+    all_codes: set = set(json.load(f))
 
 @ensure_csrf_cookie
 def csrf(request):
@@ -167,7 +169,7 @@ def my_sheets(request):
             "id": s.id,
             "owner": request.user.username,
             "rank": None,      # You can compute this later
-            "submitted": False # Add logic later
+            "submitted": s.code != None
         }
         for s in sheets
     ]
@@ -206,3 +208,79 @@ def submitted_count(request):
         "success": True,
         "count": count
     })
+
+def submit(request):
+    if request.method != "POST":
+        return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+    if not request.user.is_authenticated:
+        return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
+
+    # Parse JSON body
+    try:
+        body = json.loads(request.body)
+    except:
+        return JsonResponse({"success": False, "message": "Invalid JSON"}, status=400)
+
+    code = body.get("code")
+    sheet_id = body.get("sheet_id")
+
+    if not code or not sheet_id:
+        return JsonResponse({"success": False, "message": "code and sheet_id required"}, status=400)
+
+    code = str(code).upper()
+
+    # Validate code
+    if code not in all_codes:
+        return JsonResponse({"success": False, "message": "Bad code"}, status=403)
+
+    # Check if code already used
+    if Sheet.objects.filter(code=code).exists():
+        return JsonResponse({"success": False, "message": "Code already used"}, status=403)
+
+    # Get the sheet
+    sheet = Sheet.objects.filter(id=sheet_id, user=request.user).first()
+    if not sheet:
+        return JsonResponse({"success": False, "message": "Sheet not found"}, status=404)
+
+    # Check if already submitted
+    if sheet.code is not None:
+        return JsonResponse({"success": False, "message": "Sheet already submitted"}, status=403)
+
+    # Submit the sheet
+    sheet.code = code
+    sheet.save()
+
+    return JsonResponse({"success": True})
+
+def unsubmit(request):
+    if request.method != "POST":
+        return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+    if not request.user.is_authenticated:
+        return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
+
+    # Parse JSON body
+    try:
+        body = json.loads(request.body)
+    except:
+        return JsonResponse({"success": False, "message": "Invalid JSON"}, status=400)
+
+    sheet_id = body.get("sheet_id")
+    if not sheet_id:
+        return JsonResponse({"success": False, "message": "sheet_id required"}, status=400)
+
+    # Get the sheet
+    sheet = Sheet.objects.filter(id=sheet_id, user=request.user).first()
+    if not sheet:
+        return JsonResponse({"success": False, "message": "Sheet not found"}, status=404)
+
+    # Must already be submitted
+    if sheet.code is None:
+        return JsonResponse({"success": False, "message": "Sheet is not submitted"}, status=403)
+
+    # Unsubmit the sheet
+    sheet.code = None
+    sheet.save()
+
+    return JsonResponse({"success": True})

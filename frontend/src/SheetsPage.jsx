@@ -1,5 +1,6 @@
 import React from 'react';
 import './SheetsPage.css';
+import SubmitConfirmation from './SubmitConfirmation';
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -13,11 +14,17 @@ class SheetsPage extends React.Component {
 
         this.state = {
             mySheets: [],
-            otherSheets: []
+            otherSheets: [],
+            showSubmitConfirmation: false,
+            submittingSheetId: null
         };
 
         this.createSheet = this.createSheet.bind(this);
         this.goToEditSheet = this.goToEditSheet.bind(this);
+        this.unsubmit = this.unsubmit.bind(this);
+        this.showSubmitConfirmation = this.showSubmitConfirmation.bind(this);
+        this.hideSubmitConfirmation = this.hideSubmitConfirmation.bind(this);
+        this.markSubmitted = this.markSubmitted.bind(this);
     }
     
     componentDidMount() {
@@ -75,43 +82,106 @@ class SheetsPage extends React.Component {
         });
     }
 
+    unsubmit(sheetId) {
+        fetch("http://localhost:8000/api/sheets/unsubmit/", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            body: JSON.stringify({
+                sheet_id: sheetId
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                // Update UI: mark sheet as unsubmitted
+                this.setState(prev => ({
+                    mySheets: prev.mySheets.map(s =>
+                        s.id === sheetId ? { ...s, submitted: false} : s
+                    )
+                }));
+            } else {
+                alert(data.message || "Unsubmit failed.");
+            }
+        })
+        .catch(() => {
+            alert("An error occurred while unsubmitting.");
+        });
+    }
+
+    showSubmitConfirmation(sheetId) {
+        this.setState((prevState) => ({
+            showSubmitConfirmation: true,
+            submittingSheetId: sheetId
+        })); 
+    }
+
+    hideSubmitConfirmation() {
+        this.setState((prevState) => ({
+            showSubmitConfirmation: false
+        })); 
+    }
+
+    markSubmitted(sheetId) {
+        this.setState(prev => ({
+            mySheets: prev.mySheets.map(s =>
+                s.id === sheetId ? { ...s, submitted: true} : s
+            )
+        }));
+    }
+
     render() {
         return (
-            <div className="sheets-page">
-                <div className="sheets-container">
+            <>
+                <div className="sheets-page">
+                    <div className="sheets-container">
 
-                    <h2 className="section-title">My Sheets</h2>
+                        <h2 className="section-title">My Sheets</h2>
 
-                    <div className="sheet-list">
-                        {this.state.mySheets.map((sheet) => (
-                            <Sheet
-                                key={sheet.id}
-                                sheet={sheet}
-                                mine={true}
-                                onEdit={this.goToEditSheet}
-                                editable={true}
-                            />
-                        ))}
+                        <div className="sheet-list">
+                            {this.state.mySheets.map((sheet) => (
+                                <Sheet
+                                    key={sheet.id}
+                                    sheet={sheet}
+                                    mine={true}
+                                    onEdit={this.goToEditSheet}
+                                    onUnsubmit={(id) => this.unsubmit(id)}
+                                    onSubmit={(id) => this.showSubmitConfirmation(id)}
+                                />
+                            ))}
+                        </div>
+                        
+                        {this.state.mySheets.length < 2 && <button className="add-sheet-button" onClick={this.createSheet}>+</button>}
+                        
+                        <h1>_________________</h1>
+
+                        <h2 className="section-title other-title">Other Sheets</h2>
+
+                        <div className="sheet-list">
+                            {this.state.otherSheets.map((sheet) => (
+                                <Sheet
+                                    key={sheet.id}
+                                    sheet={sheet}
+                                    mine={false}
+                                />
+                            ))}
+                        </div>
+
                     </div>
-                    
-                    {this.state.mySheets.length < 2 && <button className="add-sheet-button" onClick={this.createSheet}>+</button>}
-                    
-                    <h1>_________________</h1>
-
-                    <h2 className="section-title other-title">Other Sheets</h2>
-
-                    <div className="sheet-list">
-                        {this.state.otherSheets.map((sheet) => (
-                            <Sheet
-                                key={sheet.id}
-                                sheet={sheet}
-                                mine={false}
-                            />
-                        ))}
-                    </div>
-
                 </div>
-            </div>
+
+                {this.state.showSubmitConfirmation && (
+                    <SubmitConfirmation 
+                        sheetId={this.state.submittingSheetId} 
+                        onHide={this.hideSubmitConfirmation} 
+                        onSubmitted={() => this.markSubmitted(this.state.submittingSheetId)}
+                        skipSave={true}
+                    />
+                )}
+            </>
         );
     }
 }
@@ -132,13 +202,28 @@ class Sheet extends React.Component {
                         <span className="label">Rank:</span> {sheet.rank}
                     </p>
 
-                    {!sheet.submitted && <button className='sheet-button'>Submit</button>}
+                    {mine && !sheet.submitted && (
+                        <button 
+                            className='sheet-button'
+                            onClick={() => this.props.onSubmit(sheet.id)}
+                        >
+                            Submit
+                        </button>
+                    )}
+                    {mine && sheet.submitted && (
+                        <button
+                            className='sheet-button'
+                            onClick={() => this.props.onUnsubmit(sheet.id)}
+                        >
+                            Unsubmit
+                        </button>
+                    )}
                 </div>
 
                 <div className="sheet-actions">
                     <button className="sheet-button">View</button>
 
-                    {mine && (
+                    {mine && !sheet.submitted && (
                         <button
                             className="sheet-button"
                             onClick={() => this.props.onEdit(sheet.id)}

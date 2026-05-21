@@ -10,8 +10,8 @@ class Sheet(models.Model):
 class Prediction(models.Model):
     sheet = models.ForeignKey(Sheet, on_delete=models.CASCADE, null=True, blank=True)
     match_id = models.IntegerField()
-    home_score = models.IntegerField()
-    away_score = models.IntegerField()
+    home_score = models.IntegerField(null=True, blank=True)
+    away_score = models.IntegerField(null=True, blank=True)
 
     class Meta:
         unique_together = ('sheet', 'match_id')

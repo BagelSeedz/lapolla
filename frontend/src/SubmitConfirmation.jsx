@@ -21,11 +21,56 @@ class SubmitConfirmation extends React.Component {
         this.setState({code: e.target.value})
     }
 
-    submit() {
-        const preds = this.props.preds;
+    async submit() {
+        const code = this.state.code;
 
-        console.log(this.state.code)
+        if (!code || code.trim() === "") {
+            alert("Please enter a code before submitting.");
+            return;
+        }
+
+        // Save before submitting
+        if (!this.props.skipSave) {
+            const ok = await this.props.save();
+            if (!ok) {
+                alert("Save failed.");
+                return;
+            }
+        }
+
+        // Now submit
+        fetch("http://localhost:8000/api/sheets/submit/", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            body: JSON.stringify({
+                code: code,
+                sheet_id: this.props.sheetId
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                this.props.onHide();
+                
+                if (this.props.onSubmitted) {
+                    this.props.onSubmitted();
+                } else {
+                    // ⭐ Otherwise default to redirect (ScoreInputPage case)
+                    window.location.hash = "sheets";
+                }
+            } else {
+                alert(data.message || "Submission failed.");
+            }
+        })
+        .catch(() => {
+            alert("An error occurred while submitting.");
+        });
     }
+
 
     render() {
         return (

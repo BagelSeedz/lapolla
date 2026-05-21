@@ -43,6 +43,7 @@ class ScoreInputPage extends React.Component {
         this.editScore = this.editScore.bind(this);
         this.normalizePredictions = this.normalizePredictions.bind(this);
         this.checkForEmpty = this.checkForEmpty.bind(this);
+        this.save = this.save.bind(this)
     }
 
     componentDidMount() {
@@ -102,13 +103,8 @@ class ScoreInputPage extends React.Component {
         }));
     }
 
-    handleSave() {
-        if (this.checkForEmpty()) {
-            this.setState({ warning: "You have empty scores. Please fill them in." });
-            return;
-        }
-
-        fetch("http://localhost:8000/api/predict/", {
+    save() {
+        return fetch("http://localhost:8000/api/predict/", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -122,13 +118,21 @@ class ScoreInputPage extends React.Component {
         })
         .then(res => res.json())
         .then(data => {
-            if (data.success) {
-                window.location.hash = "sheets";
-            } else {
-                console.log("Failed to save. An error occurred.")
-            }
-        });
+            return data.success === true;
+        })
+        .catch(() => false);
     }
+
+    async handleSave() {
+        const ok = await this.save();
+
+        if (ok) {
+            window.location.hash = "sheets";
+        } else {
+            console.log("Failed to save. An error occurred.");
+        }
+    }
+
 
     showSubmitConfirmation() {
         if (this.checkForEmpty()) {
@@ -178,7 +182,7 @@ class ScoreInputPage extends React.Component {
         if (!this.props.user.authenticated)
             window.location.hash = "login";
 
-        if (!this.props.sheetId || this.props.submitted) {
+        if (!this.props.sheetId || this.state.submitted) {
             window.location.hash = "sheets"
         }
 
@@ -234,7 +238,7 @@ class ScoreInputPage extends React.Component {
                 </div>
                 
 
-                {this.state.showSubmitConfirmation && <SubmitConfirmation preds={this.state.predictions} onHide={this.hideSubmitConfirmation}/>}
+                {this.state.showSubmitConfirmation && <SubmitConfirmation sheetId={this.props.sheetId} onHide={this.hideSubmitConfirmation} save={this.save}/>}
             </>
         )
     }
