@@ -180,7 +180,22 @@ def other_sheets(request):
     if not request.user.is_authenticated:
         return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
 
-    return JsonResponse({"success": True, "sheets": []})
+    # All sheets that:
+    # 1. Are NOT owned by the current user
+    # 2. Have a code (meaning they are submitted)
+    sheets = Sheet.objects.filter(code__isnull=False).exclude(user=request.user)
+
+    data = [
+        {
+            "id": s.id,
+            "owner": s.user.username,
+            "rank": None,          # You can compute this later
+            "submitted": True      # Always true because code != None
+        }
+        for s in sheets
+    ]
+
+    return JsonResponse({"success": True, "sheets": data})
 
 def create_sheet(request):
     if request.method != "POST":
