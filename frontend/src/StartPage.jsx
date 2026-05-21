@@ -7,6 +7,7 @@ class StartPage extends React.Component {
 
         this.state = {
             firstSheetId: null,
+            firstSheetSubmitted: false,
             loadingSheets: false,
             submittedCount: 0,
         };
@@ -25,7 +26,10 @@ class StartPage extends React.Component {
             .then(res => res.json())
             .then(data => {
                 if (data.success && data.sheets.length > 0) {
-                    this.setState({ firstSheetId: data.sheets[0].id });
+                    this.setState({ 
+                        firstSheetId: data.sheets[0].id,
+                        firstSheetSubmitted: data.sheets[0].submitted
+                    });
                 }
             })
             .finally(() => {
@@ -50,9 +54,15 @@ class StartPage extends React.Component {
             return;
         }
 
+        if (this.state.firstSheetSubmitted) {
+            window.location.hash = "sheets"
+            return;
+        }
+
         if (this.state.firstSheetId) {
             // Logged in → go to first sheet
             window.location.hash = `#/score-input?sheet_id=${this.state.firstSheetId}`;
+            return;
         }
     }
 
