@@ -24,5 +24,6 @@ urlpatterns = [
     path("sheets/create/", views.create_sheet, name="create_sheet"),
     path("sheets/count/", views.submitted_count, name="submitted_count"),
     path("sheets/submit/", views.submit, name="submit"),
-    path("sheets/unsubmit/", views.unsubmit, name="unsubmit")
+    path("sheets/unsubmit/", views.unsubmit, name="unsubmit"),
+    path("sheets/export/<int:sheet_id>/", views.export_sheet, name="export")
 ]

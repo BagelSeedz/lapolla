@@ -25,6 +25,7 @@ class SheetsPage extends React.Component {
         this.showSubmitConfirmation = this.showSubmitConfirmation.bind(this);
         this.hideSubmitConfirmation = this.hideSubmitConfirmation.bind(this);
         this.markSubmitted = this.markSubmitted.bind(this);
+        this.viewSheet = this.viewSheet.bind(this);
     }
     
     componentDidMount() {
@@ -133,6 +134,12 @@ class SheetsPage extends React.Component {
         }));
     }
 
+    viewSheet(sheetId) {
+        // Opens the export URL in a new tab and triggers download
+        window.open(`http://localhost:8000/api/sheets/export/${sheetId}/`, "_blank");
+        // window.location.href = `http://localhost:8000/api/sheets/export/${sheetId}/`;
+    }
+
     render() {
         return (
             <>
@@ -150,6 +157,7 @@ class SheetsPage extends React.Component {
                                     onEdit={this.goToEditSheet}
                                     onUnsubmit={(id) => this.unsubmit(id)}
                                     onSubmit={(id) => this.showSubmitConfirmation(id)}
+                                    onView={(id) => this.viewSheet(id)}
                                 />
                             ))}
                         </div>
@@ -166,6 +174,7 @@ class SheetsPage extends React.Component {
                                     key={sheet.id}
                                     sheet={sheet}
                                     mine={false}
+                                    onView={(id) => this.viewSheet(id)}
                                 />
                             ))}
                         </div>
@@ -221,7 +230,13 @@ class Sheet extends React.Component {
                 </div>
 
                 <div className="sheet-actions">
-                    <button className="sheet-button">View</button>
+                    <button 
+                        className="sheet-button"
+                        onClick={() => this.props.onView(sheet.id)}
+                    >
+                        View
+                    </button>
+
 
                     {mine && !sheet.submitted && (
                         <button

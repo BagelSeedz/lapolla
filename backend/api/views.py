@@ -4,10 +4,15 @@ from .models import Prediction, Sheet
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import HttpResponse
+from openpyxl import load_workbook
+from io import BytesIO
 import json
 
 with open('api/codes.json', 'r', encoding='utf-8') as f:
     all_codes: set = set(json.load(f))
+with open('api/matchmap.json', 'r', encoding='utf-8') as f:
+    excel_map: dict = json.load(f)
 
 @ensure_csrf_cookie
 def csrf(request):
@@ -299,3 +304,48 @@ def unsubmit(request):
     sheet.save()
 
     return JsonResponse({"success": True})
+
+def export_sheet(request, sheet_id):
+    sheet = Sheet.objects.get(id=sheet_id)
+
+    # Build dict: match_id -> Prediction object
+    preds = {p.match_id: p for p in Prediction.objects.filter(sheet=sheet)}
+
+    wb = load_workbook("api/Polla2026.xlsx")
+    ws = wb.active
+
+    for match_id in range(1, 73):
+
+        # Skip if match not in map
+        if str(match_id) not in excel_map:
+            continue
+
+        pred = preds.get(match_id)
+        if not pred:
+            print(match_id, "has no pred")
+            continue
+
+        home_pred = pred.home_score
+        away_pred = pred.away_score
+
+        # Skip if either score is missing
+        if home_pred is None or away_pred is None:
+            print("one pred is missing")
+            continue
+
+        home_cell, away_cell = excel_map[str(match_id)]
+
+        ws[home_cell] = home_pred
+        ws[away_cell] = away_pred
+        print(match_id, "is done")
+
+    output = BytesIO()
+    wb.save(output)
+    output.seek(0)
+
+    response = HttpResponse(
+        output,
+        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    response["Content-Disposition"] = f'attachment; filename="{sheet.user.get_username()}_{sheet_id}.xlsx"'
+    return response
