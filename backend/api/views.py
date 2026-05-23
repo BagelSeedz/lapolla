@@ -322,22 +322,16 @@ def export_sheet(request, sheet_id):
 
         pred = preds.get(match_id)
         if not pred:
-            print(match_id, "has no pred")
             continue
 
         home_pred = pred.home_score
         away_pred = pred.away_score
 
-        # Skip if either score is missing
-        if home_pred is None or away_pred is None:
-            print("one pred is missing")
-            continue
-
-        home_cell, away_cell = excel_map[str(match_id)]
-
-        ws[home_cell] = home_pred
-        ws[away_cell] = away_pred
-        print(match_id, "is done")
+        if home_pred is not None:
+            ws[excel_map[str(match_id)][0]] = home_pred
+        
+        if away_pred is not None:
+            ws[excel_map[str(match_id)][1]] = away_pred
 
     output = BytesIO()
     wb.save(output)
