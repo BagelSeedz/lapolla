@@ -34,7 +34,7 @@ class StartPage extends React.Component {
         if (this.props.user.authenticated) {
             this.setState({ loadingSheets: true });
 
-            fetch("http://localhost:8000/api/sheets/my/", {
+            fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/my/", {
                 credentials: "include"
             })
             .then(res => res.json())
@@ -52,7 +52,7 @@ class StartPage extends React.Component {
         }
 
         // Submitted count
-        fetch("http://localhost:8000/api/sheets/count/")
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/count/")
         .then(res => res.json())
         .then(data => {
             if (data.success) {

@@ -30,7 +30,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "lapolla.herokuapp.com",
+    "lapolla-a992dd24e979.herokuapp.com",
 ]
 
 
@@ -138,7 +138,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://lapolla.herokuapp.com",
+    "https://lapolla-a992dd24e979.herokuapp.com",
     "http://localhost:3000",
 ]
 

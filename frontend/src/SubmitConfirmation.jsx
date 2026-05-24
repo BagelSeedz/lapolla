@@ -39,7 +39,7 @@ class SubmitConfirmation extends React.Component {
         }
 
         // Now submit
-        fetch("http://localhost:8000/api/sheets/submit/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/submit/", {
             method: "POST",
             credentials: "include",
             headers: {

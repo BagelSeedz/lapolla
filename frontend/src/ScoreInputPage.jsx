@@ -47,11 +47,11 @@ class ScoreInputPage extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8000/api/csrf/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
             credentials: "include"
         });
 
-        fetch(`http://localhost:8000/api/predict/?sheet_id=${this.props.sheetId}`, {
+        fetch(`https://lapolla-a992dd24e979.herokuapp.com/api/predict/?sheet_id=${this.props.sheetId}`, {
             credentials: "include"
         })
         .then(res => res.json())
@@ -104,7 +104,7 @@ class ScoreInputPage extends React.Component {
     }
 
     save() {
-        return fetch("http://localhost:8000/api/predict/", {
+        return fetch("https://lapolla-a992dd24e979.herokuapp.com/api/predict/", {
             method: "POST",
             credentials: "include",
             headers: {

@@ -29,10 +29,10 @@ class SheetsPage extends React.Component {
     }
     
     componentDidMount() {
-        fetch("http://localhost:8000/api/csrf/", { credentials: "include" });
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", { credentials: "include" });
 
         // Load My Sheets
-        fetch("http://localhost:8000/api/sheets/my/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/my/", {
             credentials: "include"
         })
         .then(res => res.json())
@@ -43,7 +43,7 @@ class SheetsPage extends React.Component {
         });
 
         // Load Other Sheets
-        fetch("http://localhost:8000/api/sheets/other/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/other/", {
             credentials: "include"
         })
         .then(res => res.json())
@@ -62,7 +62,7 @@ class SheetsPage extends React.Component {
         if (!this.props.user.authenticated)
             window.location.hash = "login";
 
-        fetch("http://localhost:8000/api/sheets/create/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/create/", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -87,7 +87,7 @@ class SheetsPage extends React.Component {
     }
 
     unsubmit(sheetId) {
-        fetch("http://localhost:8000/api/sheets/unsubmit/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/unsubmit/", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -139,8 +139,7 @@ class SheetsPage extends React.Component {
 
     viewSheet(sheetId) {
         // Opens the export URL in a new tab and triggers download
-        window.open(`http://localhost:8000/api/sheets/export/${sheetId}/`, "_blank");
-        // window.location.href = `http://localhost:8000/api/sheets/export/${sheetId}/`;
+        window.open(`https://lapolla-a992dd24e979.herokuapp.com/api/sheets/export/${sheetId}/`, "_blank");
     }
 
     render() {

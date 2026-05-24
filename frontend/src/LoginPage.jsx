@@ -19,7 +19,7 @@ class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8000/api/csrf/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
             credentials: "include"
         });
     }
@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
 
         this.setState({ loading: true, error: null });
 
-        fetch("http://localhost:8000/api/login_user/", {
+        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/login_user/", {
             method: "POST",
             credentials: "include",
             headers: {

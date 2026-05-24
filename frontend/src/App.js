@@ -37,12 +37,12 @@ class App extends React.Component {
 
   componentDidMount() {
     // 1. Get CSRF cookie
-    fetch("http://localhost:8000/api/csrf/", {
+    fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
       credentials: "include"
     });
 
     // 2. Then fetch /me
-    fetch("http://localhost:8000/api/me/", {
+    fetch("https://lapolla-a992dd24e979.herokuapp.com/api/me/", {
       credentials: "include"
     })
       .then(res => res.json())
@@ -59,7 +59,7 @@ class App extends React.Component {
   }
 
   updateUser() {
-    return fetch("http://localhost:8000/api/me/", {
+    return fetch("https://lapolla-a992dd24e979.herokuapp.com/api/me/", {
       credentials: "include"
     })
       .then(res => res.json())
@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   logout() {
-    fetch("http://localhost:8000/api/logout_user/", {
+    fetch("https://lapolla-a992dd24e979.herokuapp.com/api/logout_user/", {
         method: "POST",
         credentials: "include",
         headers: {
