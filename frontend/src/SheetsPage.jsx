@@ -59,6 +59,9 @@ class SheetsPage extends React.Component {
     }
 
     createSheet() {
+        if (!this.props.user.authenticated)
+            window.location.hash = "login";
+
         fetch("http://localhost:8000/api/sheets/create/", {
             method: "POST",
             credentials: "include",
