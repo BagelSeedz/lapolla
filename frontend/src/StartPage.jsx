@@ -176,7 +176,7 @@ class Group extends React.Component {
 
         return(
             <div className='start-group' style={{border: '5px solid ' + this.props.color}}>
-                <p style={{textAlign: 'center', fontWeight: 'bolder'}}>Group {this.props.letter}<br/>______________</p>
+                <p style={{textAlign: 'center', fontWeight: 'bolder'}}>Group {this.props.letter}</p>
                 <p style={{marginLeft: '10px'}}>
                     <img 
                         src={teams[0].flag}
