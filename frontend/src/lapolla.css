@@ -145,6 +145,43 @@ button {
     color: black;
     font-weight: bold;
 }
+.start-page-wrapper {
+    height: 90vh; /* Only show background for first 90% of viewport */
+    background-image: url("https://png.pngtree.com/png-vector/20250923/ourmid/pngtree-the-fifa-world-cup-trophy-png-image_17551611.webp");
+    background-size: contain; /* Keep proportions */
+    background-repeat: no-repeat;
+    background-position: center bottom; /* Trophy sits at bottom of the 90vh area */
+}
+.prize-pool-container {
+    background-color: black;
+    text-align: center;
+}
+.prize-pool-container h1 {
+    font-size: 150px;
+}
+.prize-pool-container h2 {
+    font-size: 50px;
+}
+.start-group {
+    width: 200px;
+    background-color: #B0C4DE;
+    color: black;
+    margin: 25px;
+    margin-bottom: 50px;
+    border-radius: 15%;
+    border: 2px solid rgb(0, 0, 0);
+}
+.team-flag {
+    width: 24px;
+    height: 16px;
+    object-fit: cover;
+    margin-right: 8px;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.start-column {
+    width: 30%;
+}
 
 @media (max-width: 600px) {
     .small-hide {

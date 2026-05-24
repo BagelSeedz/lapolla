@@ -1,5 +1,15 @@
 import React from 'react';
 import './lapolla.css';
+import groups from './Groups.json'
+import teamsJSON from './Teams.json'
+
+function getTeamsFromIds(teamIds) {
+    var teams = [];
+    teamIds.forEach(id => {
+        teams.push(teamsJSON[id])
+    });
+    return teams;
+}
 
 class StartPage extends React.Component {
     constructor(props) {
@@ -10,9 +20,13 @@ class StartPage extends React.Component {
             firstSheetSubmitted: false,
             loadingSheets: false,
             submittedCount: 0,
+            animatedPrize: 0,
         };
 
+        this.prizeRef = React.createRef();
+
         this.handleStart = this.handleStart.bind(this);
+        this.animatePrize = this.animatePrize.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +59,20 @@ class StartPage extends React.Component {
                 this.setState({submittedCount: data.count})
             }
         })
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    this.animatePrize();
+                    observer.disconnect(); // run only once
+                }
+            },
+            { threshold: 0.5 }
+        );
+
+        if (this.prizeRef.current) {
+            observer.observe(this.prizeRef.current);
+        }
     }
 
     handleStart() {
@@ -66,15 +94,125 @@ class StartPage extends React.Component {
         }
     }
 
+    animatePrize() {
+        const target = this.state.submittedCount * 20;
+        const duration = 1200; // ms
+        const start = performance.now();
+
+        const step = (timestamp) => {
+            const progress = Math.min((timestamp - start) / duration, 1);
+            const value = Math.floor(progress * target);
+
+            this.setState({ animatedPrize: value });
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        };
+
+        requestAnimationFrame(step);
+    }
+
     render() {
         return (
-            <div className='full-height center'>
-                <button onClick={this.handleStart}>
-                    Start Score Input
-                </button>
+            <>
+                <div className="start-page-wrapper center">
+                    <div className='start-column small-hide'>
+                        <div className='full-height center'>
+                            <div>
+                                <Group letter='A' color='limegreen'/>
+                                <Group letter='B' color='red'/>
+                                <Group letter='C' color='yellow'/>
+                            </div>
+                            <div>
+                                <Group letter='D' color='DodgerBlue'/>
+                                <Group letter='E' color='orange'/>
+                                <Group letter='F' color='Gray'/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='start-column'>
+                        <div className='full-height center'>
+                            <button 
+                                style={{minWidth: '200px'}}
+                                onClick={this.handleStart}>
+                                Start Score Input
+                            </button>
+                        </div>
+                    </div>
+                    <div className='start-column small-hide'>
+                        <div className='full-height center'>
+                            <div>
+                                <Group letter='G' color='plum'/>
+                                <Group letter='H' color='cyan'/>
+                                <Group letter='I' color='purple'/>
+                            </div>
+                            <div>
+                                <Group letter='J' color='DarkRed'/>
+                                <Group letter='K' color='magenta'/>
+                                <Group letter='L' color='#BA55D3'/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='prize-pool-container' ref={this.prizeRef}>
+                    <div className='full-height center'>
+                        <div>
+                            <h1>Prize Pool</h1>
+                            <h1 style={{color: 'green'}}>${this.state.animatedPrize}</h1>
+                            <h2>Sheets submitted: {this.state.submittedCount}</h2>
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+    }
+}
+
+
+class Group extends React.Component {
+    render() {
+        const teams = getTeamsFromIds(groups[this.props.letter]);
+
+        return(
+            <div className='start-group' style={{border: '5px solid ' + this.props.color}}>
+                <p style={{textAlign: 'center', fontWeight: 'bolder'}}>Group {this.props.letter}<br/>______________</p>
+                <p style={{marginLeft: '10px'}}>
+                    <img 
+                        src={teams[0].flag}
+                        alt={teams[0].name + " flag"}
+                        className="team-flag" 
+                    /> 
+                    {teams[0].name}
+                </p>
+                <p style={{marginLeft: '10px'}}>
+                    <img 
+                        src={teams[1].flag} 
+                        alt={teams[1].name + " flag"}
+                        className="team-flag" 
+                    /> 
+                    {teams[1].name}
+                </p>
+                <p style={{marginLeft: '10px'}}>
+                    <img 
+                        src={teams[2].flag} 
+                        alt={teams[2].name + " flag"}
+                        className="team-flag" 
+                    /> 
+                    {teams[2].name}
+                </p>
+                <p style={{marginLeft: '10px'}}>
+                    <img 
+                        src={teams[3].flag} 
+                        alt={teams[3].name + " flag"}
+                        className="team-flag" 
+                    /> 
+                    {teams[3].name}
+                </p>
             </div>
         );
     }
 }
+
 
 export default StartPage;
