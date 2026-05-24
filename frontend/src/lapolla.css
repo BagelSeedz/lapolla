@@ -188,6 +188,18 @@ button:hover {
 .start-column {
     width: 30%;
 }
+.hamburger_container {
+    position: sticky;
+    top: 0px;
+    z-index: 11;
+
+    background-color: black;
+    opacity: 90%;
+    height: 100vh;
+}
+.small-height-hide {
+    display: inline;
+}
 
 @media (max-width: 600px) {
     .small-hide {
@@ -218,7 +230,7 @@ button:hover {
     }
 }
 @media (max-height: 800px) {
-    .small-hide {
+    .small-height-hide {
         display: none;
     }
 }

@@ -117,7 +117,7 @@ class StartPage extends React.Component {
         return (
             <>
                 <div className="start-page-wrapper center">
-                    <div className='start-column small-hide'>
+                    <div className='start-column small-hide small-height-hide'>
                         <div className='full-height center'>
                             <div>
                                 <Group letter='A' color='limegreen'/>
@@ -133,14 +133,21 @@ class StartPage extends React.Component {
                     </div>
                     <div className='start-column'>
                         <div className='full-height center'>
-                            <button 
-                                style={{minWidth: '200px'}}
-                                onClick={this.handleStart}>
-                                Start Score Input
-                            </button>
+                            <div>
+                                <div className='center large-hide' style={{textAlign: 'center'}}>
+                                    <h1>LaPolla</h1>
+                                    <h2 style={{paddingBottom: '50%'}}>FIFA World Cup 2026</h2>
+                                </div>
+                                <button 
+                                    style={{minWidth: '200px'}}
+                                    onClick={this.handleStart}>
+                                    Start Score Input
+                                </button>
+                            </div>
+                            
                         </div>
                     </div>
-                    <div className='start-column small-hide'>
+                    <div className='start-column small-hide small-height-hide'>
                         <div className='full-height center'>
                             <div>
                                 <Group letter='G' color='plum'/>
@@ -155,6 +162,7 @@ class StartPage extends React.Component {
                         </div>
                     </div>
                 </div>
+
                 <div className='prize-pool-container' ref={this.prizeRef}>
                     <div className='full-height center'>
                         <div>
@@ -162,6 +170,34 @@ class StartPage extends React.Component {
                             <h1 style={{color: 'green'}}>${this.state.animatedPrize}</h1>
                             <h2>Sheets submitted: {this.state.submittedCount}</h2>
                         </div>
+                    </div>
+                </div>
+
+                <div className='large-hide center'>
+                    <h1 style={{textAlign: 'center'}}>Groups</h1>
+                    <div className='center'>
+                        <Group letter='A' color='limegreen'/>
+                        <Group letter='B' color='red'/>
+                    </div>
+                    <div className='center'>
+                        <Group letter='C' color='yellow'/>
+                        <Group letter='D' color='DodgerBlue'/>
+                    </div>
+                    <div className='center'>
+                        <Group letter='E' color='orange'/>
+                        <Group letter='F' color='Gray'/>
+                    </div>
+                    <div className='center'>
+                        <Group letter='G' color='plum'/>
+                        <Group letter='H' color='cyan'/>
+                    </div>
+                    <div className='center'>
+                        <Group letter='I' color='purple'/>
+                        <Group letter='J' color='DarkRed'/>
+                    </div>
+                    <div className='center'>
+                        <Group letter='K' color='magenta'/>
+                        <Group letter='L' color='#BA55D3'/>
                     </div>
                 </div>
             </>
