@@ -138,16 +138,14 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.herokuapp.com",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "https://lapolla2026.app",
+    "https://*.herokuapp.com"
 ]
 
 # CORS
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "https://lapolla2026.app",
 ]
 
 CSRF_COOKIE_SECURE = True
@@ -155,6 +153,3 @@ SESSION_COOKIE_SECURE = True
 
 CSRF_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SAMESITE = "None"
-
-CSRF_COOKIE_DOMAIN = "localhost"
-SESSION_COOKIE_DOMAIN = "localhost"
