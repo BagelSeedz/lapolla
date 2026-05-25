@@ -179,6 +179,9 @@ class SheetsPage extends React.Component {
 
 class Sheet extends React.Component {
     render() {
+        if (!this.props.user.authenticated)
+            window.location.hash = "login";
+        
         const { sheet, mine } = this.props;
 
         return (
