@@ -138,9 +138,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://lapolla-a992dd24e979.herokuapp.com",
-    "http://lapolla-a992dd24e979.herokuapp.com",
+    "https://*.herokuapp.com",
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 # CORS
