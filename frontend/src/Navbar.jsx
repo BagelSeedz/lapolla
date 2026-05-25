@@ -79,7 +79,7 @@ class Navbar extends React.Component {
                             {this.props.user.authenticated 
                                 ? (
                                     <>
-                                        <p className="small-hide">Hello {this.props.user.username}!</p>
+                                        <p>Hello {this.props.user.username}!</p>
                                         <button onClick={this.props.logout}>Log Out</button>
                                     </>
                                 )
