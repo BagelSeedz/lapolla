@@ -16,10 +16,10 @@
     { "id": 50, "time": "June 24 3:00 PM", "place": "Seattle" }
   ],
   "C": [
-    { "id": 8, "time": "June 13 6:00 PM", "place": "New York/New Jersey" },
-    { "id": 7, "time": "June 13 9:00 PM", "place": "Boston" },
-    { "id": 31, "time": "June 19 6:00 PM", "place": "Boston" },
-    { "id": 30, "time": "June 19 8:30 PM", "place": "Philadelphia" },
+    { "id": 7, "time": "June 13 6:00 PM", "place": "New York/New Jersey" },
+    { "id": 8, "time": "June 13 9:00 PM", "place": "Boston" },
+    { "id": 30, "time": "June 19 6:00 PM", "place": "Boston" },
+    { "id": 31, "time": "June 19 8:30 PM", "place": "Philadelphia" },
     { "id": 51, "time": "June 24 6:00 PM", "place": "Miami" },
     { "id": 52, "time": "June 24 6:00 PM", "place": "Atlanta" }
   ],
@@ -32,36 +32,36 @@
     { "id": 60, "time": "June 25 10:00 PM", "place": "Santa Clara" }
   ],
   "E": [
-    { "id": 11, "time": "June 14 1:00 PM", "place": "Houston" },
-    { "id": 9, "time": "June 14 7:00 PM", "place": "Philadelphia" },
-    { "id": 35, "time": "June 20 8:00 PM", "place": "Kansas City" },
-    { "id": 36, "time": "June 20 4:00 PM", "place": "Toronto" },
-    { "id": 55, "time": "June 25 4:00 PM", "place": "New York/New Jersey" },
-    { "id": 56, "time": "June 25 4:00 PM", "place": "Philadelphia" }
+    { "id": 9, "time": "June 14 1:00 PM", "place": "Houston" },
+    { "id": 11, "time": "June 14 7:00 PM", "place": "Philadelphia" },
+    { "id": 36, "time": "June 20 8:00 PM", "place": "Kansas City" },
+    { "id": 35, "time": "June 20 4:00 PM", "place": "Toronto" },
+    { "id": 56, "time": "June 25 4:00 PM", "place": "New York/New Jersey" },
+    { "id": 55, "time": "June 25 4:00 PM", "place": "Philadelphia" }
   ],
   "F": [
     { "id": 10, "time": "June 14 4:00 PM", "place": "Dallas" },
     { "id": 12, "time": "June 14 10:00 PM", "place": "Monterrey" },
-    { "id": 34, "time": "June 21 12:00 AM", "place": "Monterrey" },
-    { "id": 33, "time": "June 20 1:00 PM", "place": "Houston" },
-    { "id": 57, "time": "June 25 7:00 PM", "place": "Kansas City" },
-    { "id": 58, "time": "June 25 7:00 PM", "place": "Dallas" }
+    { "id": 33, "time": "June 21 12:00 AM", "place": "Monterrey" },
+    { "id": 34, "time": "June 20 1:00 PM", "place": "Houston" },
+    { "id": 58, "time": "June 25 7:00 PM", "place": "Kansas City" },
+    { "id": 57, "time": "June 25 7:00 PM", "place": "Dallas" }
   ],
   "G": [
-    { "id": 16, "time": "June 15 3:00 PM", "place": "Seattle" },
-    { "id": 14, "time": "June 15 9:00 PM", "place": "Los Angeles" },
-    { "id": 38, "time": "June 21 9:00 PM", "place": "Vancouver" },
-    { "id": 40, "time": "June 21 3:00 PM", "place": "Los Angeles" },
-    { "id": 65, "time": "June 26 11:00 PM", "place": "Vancouver" },
-    { "id": 66, "time": "June 26 11:00 PM", "place": "Seattle" }
+    { "id": 14, "time": "June 15 3:00 PM", "place": "Seattle" },
+    { "id": 16, "time": "June 15 9:00 PM", "place": "Los Angeles" },
+    { "id": 40, "time": "June 21 9:00 PM", "place": "Vancouver" },
+    { "id": 38, "time": "June 21 3:00 PM", "place": "Los Angeles" },
+    { "id": 66, "time": "June 26 11:00 PM", "place": "Vancouver" },
+    { "id": 65, "time": "June 26 11:00 PM", "place": "Seattle" }
   ],
   "H": [
-    { "id": 15, "time": "June 15 12:00 PM", "place": "Atlanta" },
-    { "id": 13, "time": "June 15 6:00 PM", "place": "Miami" },
+    { "id": 13, "time": "June 15 12:00 PM", "place": "Atlanta" },
+    { "id": 15, "time": "June 15 6:00 PM", "place": "Miami" },
     { "id": 39, "time": "June 21 6:00 PM", "place": "Miami" },
     { "id": 37, "time": "June 21 12:00 PM", "place": "Atlanta" },
-    { "id": 63, "time": "June 26 8:00 PM", "place": "Guadalajara" },
-    { "id": 64, "time": "June 26 8:00 PM", "place": "Houston" }
+    { "id": 64, "time": "June 26 8:00 PM", "place": "Guadalajara" },
+    { "id": 63, "time": "June 26 8:00 PM", "place": "Houston" }
   ],
   "I": [
     { "id": 18, "time": "June 16 3:00 PM", "place": "New York/New Jersey" },
@@ -74,24 +74,24 @@
   "J": [
     { "id": 20, "time": "June 16 9:00 PM", "place": "Kansas City" },
     { "id": 17, "time": "June 17 12:00 AM", "place": "Santa Clara" },
-    { "id": 41, "time": "June 22 11:00 PM", "place": "Santa Clara" },
-    { "id": 44, "time": "June 22 1:00 PM", "place": "Dallas" },
-    { "id": 71, "time": "June 27 10:00 PM", "place": "Dallas" },
-    { "id": 72, "time": "June 27 10:00 PM", "place": "Kansas City" }
+    { "id": 44, "time": "June 22 11:00 PM", "place": "Santa Clara" },
+    { "id": 41, "time": "June 22 1:00 PM", "place": "Dallas" },
+    { "id": 72, "time": "June 27 10:00 PM", "place": "Dallas" },
+    { "id": 71, "time": "June 27 10:00 PM", "place": "Kansas City" }
   ],
   "K": [
     { "id": 21, "time": "June 17 1:00 PM", "place": "Houston" },
     { "id": 24, "time": "June 17 10:00 PM", "place": "Mexico City" },
-    { "id": 45, "time": "June 23 10:00 PM", "place": "Guadalajara" },
-    { "id": 48, "time": "June 23 1:00 PM", "place": "Houston" },
+    { "id": 48, "time": "June 23 10:00 PM", "place": "Guadalajara" },
+    { "id": 45, "time": "June 23 1:00 PM", "place": "Houston" },
     { "id": 69, "time": "June 27 7:30 PM", "place": "Miami" },
     { "id": 70, "time": "June 27 7:30 PM", "place": "Atlanta" }
   ],
   "L": [
-    { "id": 23, "time": "June 17 4:00 PM", "place": "Dallas" },
-    { "id": 22, "time": "June 17 7:00 PM", "place": "Toronto" },
-    { "id": 46, "time": "June 23 7:00 PM", "place": "Toronto" },
-    { "id": 47, "time": "June 23 4:00 PM", "place": "Boston" },
+    { "id": 22, "time": "June 17 4:00 PM", "place": "Dallas" },
+    { "id": 23, "time": "June 17 7:00 PM", "place": "Toronto" },
+    { "id": 47, "time": "June 23 7:00 PM", "place": "Toronto" },
+    { "id": 46, "time": "June 23 4:00 PM", "place": "Boston" },
     { "id": 67, "time": "June 27 5:00 PM", "place": "New York/New Jersey" },
     { "id": 68, "time": "June 27 5:00 PM", "place": "Philadelphia" }
   ]
