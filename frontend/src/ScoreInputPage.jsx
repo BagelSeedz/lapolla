@@ -229,11 +229,11 @@ class ScoreInputPage extends React.Component {
                 <div className='center'>
                     {
                         this.state.groupIndex > 0 &&
-                        <button onClick={() => this.handlePrevGroup()}>← Go to Group {groupOrder[this.state.groupIndex - 1]}</button>
+                        <button onClick={() => this.handlePrevGroup()}>Go to Group {groupOrder[this.state.groupIndex - 1]}</button>
                     }
                     {
                         this.state.groupIndex < groupOrder.length - 1 &&
-                        <button onClick={() => this.handleNextGroup()}>Go to Group {groupOrder[this.state.groupIndex + 1]} →</button>
+                        <button onClick={() => this.handleNextGroup()}>Go to Group {groupOrder[this.state.groupIndex + 1]}</button>
                     }
                 </div>
                 <div className='save-buttons center'>

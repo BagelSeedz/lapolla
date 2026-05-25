@@ -78,8 +78,8 @@ class SubmitConfirmation extends React.Component {
 
     render() {
         return (
-            <div className="submit-confirmation center">
-                <div>
+            <div className="submit-confirmation-modal">
+                <div className='submit-confirmation-content'>
                     <h1>Enter submission code</h1>
                     
                     <input 

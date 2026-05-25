@@ -88,16 +88,69 @@ button:hover {
 .full-height {
     height: 90vh;
 }
-.submit-confirmation {
+/* Fullscreen dimmed background */
+.submit-confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+/* Centered modal box */
+.submit-confirmation-content {
+    background: white;
+    color: black;
+    width: 90%;
+    max-width: 400px;
+
+    padding: 25px 20px;
+    border-radius: 12px;
     text-align: center;
-    background-color: blue;
-    border: 5px solid black;
-    border-radius: 15%;
-    height: 50vh;
-    width: 50vw;
-    position: absolute;
-    top: 25vh;
-    left: 25vw;
+
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Input styling */
+.submit-confirmation-content input {
+    width: 80%;
+    padding: 12px;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    text-align: center;
+}
+
+/* Buttons */
+.submit-confirmation-content .save-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.submit-confirmation-content button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+.submit-confirmation-content button:hover {
+    background-color: rgb(0, 148, 148);
 }
 .navbar {
     display: flex;
@@ -227,6 +280,18 @@ button:hover {
     }
     .prize-pool-container h2 {
         font-size: large;
+    }
+    .submit-confirmation-content {
+        width: 92%;
+        padding: 20px 15px;
+    }
+    .submit-confirmation-content input {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+    .submit-confirmation-content button {
+        font-size: 1.05rem;
+        padding: 14px;
     }
 }
 @media (max-height: 800px) {
