@@ -1,6 +1,5 @@
 import React from 'react';
 import './SheetsPage.css';
-import SubmitConfirmation from './SubmitConfirmation';
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -113,7 +112,7 @@ class SheetsPage extends React.Component {
             alert("An error occurred while unsubmitting.");
         });
     }
-    
+
     markSubmitted(sheetId) {
         this.setState(prev => ({
             mySheets: prev.mySheets.map(s =>
