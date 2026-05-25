@@ -52,22 +52,23 @@ button:hover {
 
 /* Inner green box */
 .group-teams-inner-container {
-    display: flex;
-    flex-wrap: wrap;        /* <-- THIS is the magic */
-    justify-content: center;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, auto); /* 2 columns */
+    gap: 10px;
 
     background-color: lime;
     padding: 10px;
     border-radius: 12px;
 
-    width: auto;            /* no fixed width */
-    max-width: 100%;        /* prevent overflow */
+    width: auto;
+    max-width: 100%;
+    justify-content: center;
 }
 .header-team {
     color: black;
     background-color: white;
     border-radius: 15%;
+    margin: 10px;
 }
 .header-team img {
     height: 24px;
@@ -315,10 +316,6 @@ button:hover {
     .group-letter {
         margin-right: 0;
         margin-bottom: 10px;
-    }
-    .group-teams-inner-container {
-        width: 90%;
-        max-width: 90%;
     }
 }
 @media (max-height: 800px) {
