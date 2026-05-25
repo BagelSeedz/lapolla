@@ -211,11 +211,11 @@ button:hover {
     .matchdays-container {
         display: grid;
         grid-template-columns:
-            150px   /* team 1 */
+            125px   /* team 1 */
             40px    /* home score */
             30px    /* v */
             40px    /* away score */
-            150px;   /* team 2 */
+            125px;   /* team 2 */
         align-items: center;
         justify-content: center;
         column-gap: 10px;
