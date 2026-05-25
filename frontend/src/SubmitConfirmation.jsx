@@ -90,10 +90,9 @@ class SubmitConfirmation extends React.Component {
 
                     <div className="center save-buttons">
                         <button onClick={() => this.props.onHide()}>Cancel</button>
-                        <button className='small-hide' onClick={() => this.submit()}>Submit Scores</button>
                     </div>
-                    <div className='center save-buttons large-hide'>
-                        <button onClick={() => this.submit()}>Submit Scores</button>
+                    <div className='center save-buttons'>
+                        <button className='large-hide' onClick={() => this.submit()}>Submit Scores</button>
                     </div>
                 </div>
             </div>

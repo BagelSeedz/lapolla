@@ -188,19 +188,6 @@ class Sheet extends React.Component {
                     <p>
                         <span className="label">Owner:</span> {sheet.owner}
                     </p>
-
-                    <p>
-                        <span className="label">Rank:</span> {sheet.rank}
-                    </p>
-
-                    {mine && sheet.submitted && (
-                        <button
-                            className='sheet-button'
-                            onClick={() => this.props.onUnsubmit(sheet.id)}
-                        >
-                            Unsubmit
-                        </button>
-                    )}
                 </div>
 
                 <div className="sheet-actions">
@@ -220,9 +207,18 @@ class Sheet extends React.Component {
                             Edit
                         </button>
                     )}
+
+                    {mine && sheet.submitted && (
+                        <button
+                            className='sheet-button'
+                            onClick={() => this.props.onUnsubmit(sheet.id)}
+                        >
+                            Unsubmit
+                        </button>
+                    )}
                 </div>
 
-                <div className="sheet-id">#{sheet.id}</div>
+                <div className="sheet-id">#{sheet.rank}</div>
 
             </div>
         );

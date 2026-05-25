@@ -12,7 +12,8 @@ class Match extends React.Component {
 
     sanitize(value) {
         const num = parseInt(value, 10);
-        return isNaN(num) ? null : num;
+        if (isNaN(num)) return null;
+        return Math.max(0, Math.min(num, 99));
     }
 
     updateTeam1Score(e) {
@@ -54,6 +55,8 @@ class Match extends React.Component {
                     <input
                         className='score-input'
                         type="number"
+                        min="0"
+                        max="99"
                         value={preds.home_score}
                         onChange={this.updateTeam1Score}
                     />
@@ -63,6 +66,8 @@ class Match extends React.Component {
                     <input
                         className='score-input'
                         type="number"
+                        min="0"
+                        max="99"
                         value={preds.away_score}
                         onChange={this.updateTeam2Score}
                     />

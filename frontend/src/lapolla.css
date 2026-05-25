@@ -25,28 +25,44 @@ button:hover {
 }
 .group-header {
     position: sticky;
-    top: 0px;
+    top: 0;
     z-index: 10;
 
     display: flex;
-    text-align: center;
-    font-size: 20px;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+
     background-color: blue;
+    padding: 10px 0;
+    width: 100%;
 }
+
+/* Left side: "Group A" */
 .group-letter {
-    margin-right: 10%;
-    margin-top: 20px;
+    margin-right: 20px;
+    text-align: center;
 }
+
+/* Outer container should stretch naturally */
 .group-teams-outer-container {
-    width: 60%;
+    width: auto;
+    max-width: 100%;
 }
+
+/* Inner green box */
 .group-teams-inner-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    width: 80%;
-    height: 80%;
+    display: flex;
+    flex-wrap: wrap;        /* <-- THIS is the magic */
+    justify-content: center;
+    gap: 8px;
+
     background-color: lime;
+    padding: 10px;
+    border-radius: 12px;
+
+    width: auto;            /* no fixed width */
+    max-width: 100%;        /* prevent overflow */
 }
 .header-team {
     color: black;
@@ -122,7 +138,7 @@ button:hover {
 
 /* Input styling */
 .submit-confirmation-content input {
-    width: 80%;
+    width: 75%;
     padding: 12px;
     font-size: 1.2rem;
     margin: 15px 0;
@@ -265,13 +281,13 @@ button:hover {
         display: grid;
         grid-template-columns:
             125px   /* team 1 */
-            40px    /* home score */
+            45px    /* home score */
             30px    /* v */
-            40px    /* away score */
+            45px    /* away score */
             125px;   /* team 2 */
         align-items: center;
         justify-content: center;
-        column-gap: 10px;
+        column-gap: 5px;
         font-size: 30px;
         margin-top: 0px;
     }
@@ -292,6 +308,18 @@ button:hover {
     .submit-confirmation-content button {
         font-size: 1.05rem;
         padding: 14px;
+    }
+    .group-header {
+        flex-direction: column;
+        padding: 12px 0;
+    }
+    .group-letter {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .group-teams-inner-container {
+        width: 90%;
+        max-width: 90%;
     }
 }
 @media (max-height: 800px) {

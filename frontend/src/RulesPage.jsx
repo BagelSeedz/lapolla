@@ -3,7 +3,10 @@ import React from "react";
 class RulesPage extends React.Component {
     render() {
         return (
-            <div className="center">
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center'
+            }}>
                 <div className="rules">
                     <h1>WORLD CUP 2026 – GROUP STAGE POLLA (POOL)</h1>
                     <h2>Official Rules & Regulations</h2>
