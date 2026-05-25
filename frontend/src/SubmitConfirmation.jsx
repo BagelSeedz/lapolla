@@ -67,7 +67,7 @@ class SubmitConfirmation extends React.Component {
                     window.location.hash = "sheets";
                 }
             } else {
-                alert(data.message || "Submission failed.");
+                this.props.onHide(data.message)
             }
         })
         .catch(() => {

@@ -80,7 +80,7 @@ class SignUpPage extends React.Component {
                     {this.state.error != null && <h3>Error: {this.state.error}</h3>}
                     <form onSubmit={this.signup}>
                         <h4>Name</h4>
-                        <input name="name" type='text' placeholder='name' />
+                        <input name="name" type='text' placeholder='Name' />
                         <h4>Email</h4>
                         <input name="email" type='text' placeholder='Email' />
                         <h4>Password</h4>

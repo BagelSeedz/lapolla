@@ -11,13 +11,13 @@ class RulesPage extends React.Component {
                     <h1>WORLD CUP 2026 – GROUP STAGE POLLA (POOL)</h1>
                     <h2>Official Rules & Regulations</h2>
                     <h1>⸻</h1>
-                    <Rule title="1. Entry & Participation">
+                    <Rule title="1. Form & Participation">
                         {`
-                            Entry fee: $20 per entry
-                            Administrative fee: $2 per entry (hosting costs)
-                            Maximum of two (2) entries per person
+                            Form fee: $20 per form
+                            Administrative fee: $2 per form (hosting costs)
+                            Maximum of two (2) forms per person
                             No refunds will be issued after the submission deadline
-                            An entry is only considered valid once:
+                            An form is only considered valid once:
 
                             Payment is completed, and a full set of predictions is submitted
                         `}
@@ -26,20 +26,20 @@ class RulesPage extends React.Component {
                     <Rule title="2. Match Coverage">
                         {`
                             This pool covers only all group stage matches of the FIFA World Cup 2026
-                            All entries must be complete
+                            All forms must be complete
                         `}
                     </Rule>
                     <h1>⸻</h1>
                     <Rule title="3. Submission Deadline">
                         {`
-                            All entries must be submitted on or before June 8 (end of day)
-                            Participants may submit entries earlier if desired
+                            All forms must be submitted on or before June 8 (end of day)
+                            Participants may submit forms earlier if desired
                             All final submitted forms will be emailed to all participants between June 9 and June 10
-                            No late entries will be accepted under any circumstances
+                            No late forms will be accepted under any circumstances
                         `}
                     </Rule>
                     <h1>⸻</h1>
-                    <Rule title="4. Finality of Entries">
+                    <Rule title="4. Finality of Forms">
                         {`
                             No changes, edits, or corrections are allowed after submission
                         `}
@@ -107,7 +107,7 @@ class RulesPage extends React.Component {
                     <h1>⸻</h1>
                     <Rule title="12. Integrity & Official Records">
                         {`
-                            The organizer will retain a master database of all submitted entries
+                            The organizer will retain a master database of all submitted forms
                             The organizer’s master database will be considered the official version
                         `}
                     </Rule>
@@ -120,11 +120,11 @@ class RulesPage extends React.Component {
                     <h1>⸻</h1>
                     <Rule title="1. Inscripción y Participación">
                         {`
-                            Costo de inscripción: $20 por entrada
-                            Cargo administrativo: $2 por entrada (cubre costos de hosting)
-                            Máximo de dos (2) entradas por persona
+                            Costo de inscripción: $20 por formulario
+                            Cargo administrativo: $2 por formulario (cubre costos de hosting)
+                            Máximo de dos (2) formularios por persona
                             No se realizarán reembolsos después de la fecha límite de entrega
-                            Una entrada será válida únicamente cuando:
+                            Un formulario será válida únicamente cuando:
                                 Pago haya sido completado y el formulario completo de predicciones haya sido entregado
                         `}
                     </Rule>
@@ -132,13 +132,13 @@ class RulesPage extends React.Component {
                     <Rule title="2. Cobertura de Partidos">
                         {`
                             Esta polla cubre únicamente todos los partidos de la fase de grupos de la FIFA World Cup 2026
-                            Todas las entradas deben estar completas
+                            Todas los formularios deben estar completas
                         `}
                     </Rule>
                     <h1>⸻</h1>
                     <Rule title="3. Fecha Límite de Entrega">
                         {`
-                            Todas las entradas deben ser entregadas a más tardar el 8 de junio (fin del día)
+                            Todas los formularios deben ser entregadas a más tardar el 8 de junio (fin del día)
                             Los participantes pueden entregar sus predicciones antes si lo desean
                             All final submitted forms will be emailed to all participants between June 9 and June 10
                             Todos las formas finales serán enviadas por correo entre el 9 y 10 de junio
@@ -146,7 +146,7 @@ class RulesPage extends React.Component {
                         `}
                     </Rule>
                     <h1>⸻</h1>
-                    <Rule title="4. Carácter Final de las Entradas">
+                    <Rule title="4. Carácter Final de los Formularios">
                         {`
                             No se permiten cambios, ediciones ni correcciones después de la entrega
                         `}
@@ -214,7 +214,7 @@ class RulesPage extends React.Component {
                     <h1>⸻</h1>
                     <Rule title="12. Integridad y Registros Oficiales">
                         {`
-                            El organizador conservará una base de datos maestra de todas las entradas
+                            El organizador conservará una base de datos maestra de todas los formularios
                             La base de datos maestra del organizador será la versión oficial
                         `}
                     </Rule>

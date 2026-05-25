@@ -315,7 +315,7 @@ def export_sheet(request, sheet_id):
     wb = load_workbook("api/Polla2026.xlsx")
     ws = wb.active
 
-    ws['U2'] = str(request.user.username)
+    ws['U2'] = str(sheet.user.username)
 
     for match_id in range(1, 73):
 

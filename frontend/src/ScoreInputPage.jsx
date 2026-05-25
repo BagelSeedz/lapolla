@@ -149,8 +149,9 @@ class ScoreInputPage extends React.Component {
         })); 
     }
 
-    hideSubmitConfirmation() {
+    hideSubmitConfirmation(message) {
         this.setState((prevState) => ({
+            warning: message,
             showSubmitConfirmation: false
         })); 
     }
