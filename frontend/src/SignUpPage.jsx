@@ -1,7 +1,7 @@
 import React from 'react';
 
 async function fetchCSRFToken() {
-    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+    const res = await fetch("https://api.lapolla2026.app/api/csrf/", {
         credentials: "include"
     });
     const data = await res.json();
@@ -21,7 +21,7 @@ class SignUpPage extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+        fetch("https://api.lapolla2026.app/api/csrf/", {
             credentials: "include"
         });
     }
@@ -44,7 +44,7 @@ class SignUpPage extends React.Component {
             return;
         }
 
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/register_user/", {
+        fetch("https://api.lapolla2026.app/api/register_user/", {
             method: "POST",
             credentials: "include",
             headers: {

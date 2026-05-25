@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "lapolla-a992dd24e979.herokuapp.com",
+    "api.lapolla2026.app",
 ]
 
 
@@ -140,7 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     "https://lapolla2026.app",
     "http://lapolla2026.app",
-    "https://*.herokuapp.com"
+    "https://*.herokuapp.com",
+    "https://api.lapolla2026.app",
 ]
 
 # CORS

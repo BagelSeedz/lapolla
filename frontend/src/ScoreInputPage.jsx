@@ -10,7 +10,7 @@ import SubmitConfirmation from './SubmitConfirmation';
 const groupOrder = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 
 async function fetchCSRFToken() {
-    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+    const res = await fetch("https://api.lapolla2026.app/api/csrf/", {
         credentials: "include"
     });
     const data = await res.json();
@@ -49,11 +49,11 @@ class ScoreInputPage extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+        fetch("https://api.lapolla2026.app/api/csrf/", {
             credentials: "include"
         });
 
-        fetch(`https://lapolla-a992dd24e979.herokuapp.com/api/predict/?sheet_id=${this.props.sheetId}`, {
+        fetch(`https://api.lapolla2026.app/api/predict/?sheet_id=${this.props.sheetId}`, {
             credentials: "include"
         })
         .then(res => res.json())
@@ -108,7 +108,7 @@ class ScoreInputPage extends React.Component {
     async save() {
         const csrfToken = await fetchCSRFToken();
 
-        return fetch("https://lapolla-a992dd24e979.herokuapp.com/api/predict/", {
+        return fetch("https://api.lapolla2026.app/api/predict/", {
             method: "POST",
             credentials: "include",
             headers: {

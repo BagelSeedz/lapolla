@@ -2,7 +2,7 @@ import React from 'react';
 import './SheetsPage.css';
 
 async function fetchCSRFToken() {
-    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+    const res = await fetch("https://api.lapolla2026.app/api/csrf/", {
         credentials: "include"
     });
     const data = await res.json();
@@ -28,10 +28,10 @@ class SheetsPage extends React.Component {
     }
     
     componentDidMount() {
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", { credentials: "include" });
+        fetch("https://api.lapolla2026.app/api/csrf/", { credentials: "include" });
 
         // Load My Sheets
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/my/", {
+        fetch("https://api.lapolla2026.app/api/sheets/my/", {
             credentials: "include"
         })
         .then(res => res.json())
@@ -42,7 +42,7 @@ class SheetsPage extends React.Component {
         });
 
         // Load Other Sheets
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/other/", {
+        fetch("https://api.lapolla2026.app/api/sheets/other/", {
             credentials: "include"
         })
         .then(res => res.json())
@@ -63,7 +63,7 @@ class SheetsPage extends React.Component {
 
         const csrfToken = await fetchCSRFToken();
 
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/create/", {
+        fetch("https://api.lapolla2026.app/api/sheets/create/", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -90,7 +90,7 @@ class SheetsPage extends React.Component {
     async unsubmit(sheetId) {
         const csrfToken = await fetchCSRFToken();
 
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/unsubmit/", {
+        fetch("https://api.lapolla2026.app/api/sheets/unsubmit/", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -129,7 +129,7 @@ class SheetsPage extends React.Component {
 
     viewSheet(sheetId) {
         // Opens the export URL in a new tab and triggers download
-        window.open(`https://lapolla-a992dd24e979.herokuapp.com/api/sheets/export/${sheetId}/`, "_blank");
+        window.open(`https://api.lapolla2026.app/api/sheets/export/${sheetId}/`, "_blank");
     }
 
     render() {

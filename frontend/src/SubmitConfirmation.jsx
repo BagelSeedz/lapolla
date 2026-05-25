@@ -1,7 +1,7 @@
 import React from 'react'
 
 async function fetchCSRFToken() {
-    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+    const res = await fetch("https://api.lapolla2026.app/api/csrf/", {
         credentials: "include"
     });
     const data = await res.json();
@@ -43,7 +43,7 @@ class SubmitConfirmation extends React.Component {
         const csrfToken = await fetchCSRFToken();
 
         // Now submit
-        fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/submit/", {
+        fetch("https://api.lapolla2026.app/api/sheets/submit/", {
             method: "POST",
             credentials: "include",
             headers: {

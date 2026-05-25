@@ -9,7 +9,7 @@ import Navbar from "./Navbar";
 import SheetsPage from "./SheetsPage";
 
 async function fetchCSRFToken() {
-    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+    const res = await fetch("https://api.lapolla2026.app/api/csrf/", {
         credentials: "include"
     });
     const data = await res.json();
@@ -39,12 +39,12 @@ class App extends React.Component {
 
   componentDidMount() {
     // 1. Get CSRF cookie
-    fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+    fetch("https://api.lapolla2026.app/api/csrf/", {
       credentials: "include"
     });
 
     // 2. Then fetch /me
-    fetch("https://lapolla-a992dd24e979.herokuapp.com/api/me/", {
+    fetch("https://api.lapolla2026.app/api/me/", {
       credentials: "include"
     })
       .then(res => res.json())
@@ -61,7 +61,7 @@ class App extends React.Component {
   }
 
   updateUser() {
-    return fetch("https://lapolla-a992dd24e979.herokuapp.com/api/me/", {
+    return fetch("https://api.lapolla2026.app/api/me/", {
       credentials: "include"
     })
       .then(res => res.json())
@@ -75,7 +75,7 @@ class App extends React.Component {
   async logout() {
     const csrfToken = await fetchCSRFToken();
 
-    fetch("https://lapolla-a992dd24e979.herokuapp.com/api/logout_user/", {
+    fetch("https://api.lapolla2026.app/api/logout_user/", {
         method: "POST",
         credentials: "include",
         headers: {
