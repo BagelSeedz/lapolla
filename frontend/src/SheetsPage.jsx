@@ -1,10 +1,12 @@
 import React from 'react';
 import './SheetsPage.css';
 
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+async function fetchCSRFToken() {
+    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+        credentials: "include"
+    });
+    const data = await res.json();
+    return data.csrfToken;
 }
 
 class SheetsPage extends React.Component {
@@ -55,16 +57,18 @@ class SheetsPage extends React.Component {
         window.location.hash = `score-input?sheet_id=${sheetId}`;
     }
 
-    createSheet() {
+    async createSheet() {
         if (!this.props.user.authenticated)
             window.location.hash = "login";
+
+        const csrfToken = await fetchCSRFToken();
 
         fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/create/", {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
+                "X-CSRFToken": csrfToken
             }
         })
         .then(res => res.json())
@@ -83,13 +87,15 @@ class SheetsPage extends React.Component {
         });
     }
 
-    unsubmit(sheetId) {
+    async unsubmit(sheetId) {
+        const csrfToken = await fetchCSRFToken();
+
         fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/unsubmit/", {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
+                "X-CSRFToken": csrfToken
             },
             body: JSON.stringify({
                 sheet_id: sheetId

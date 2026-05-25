@@ -1,9 +1,11 @@
 import React from 'react';
 
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+async function fetchCSRFToken() {
+    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+        credentials: "include"
+    });
+    const data = await res.json();
+    return data.csrfToken;
 }
 
 class SignUpPage extends React.Component {
@@ -24,8 +26,10 @@ class SignUpPage extends React.Component {
         });
     }
 
-    signup(event) {
+    async signup(event) {
         event.preventDefault(); // stop page reload
+
+        const csrfToken = await fetchCSRFToken();
 
         const formData = new FormData(event.target);
         const username = formData.get("username");
@@ -45,7 +49,7 @@ class SignUpPage extends React.Component {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
+                "X-CSRFToken": csrfToken
             },
             body: JSON.stringify({ username, email, password })
         })

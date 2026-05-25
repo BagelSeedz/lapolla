@@ -8,10 +8,12 @@ import RulesPage from "./RulesPage";
 import Navbar from "./Navbar";
 import SheetsPage from "./SheetsPage";
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
+async function fetchCSRFToken() {
+    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+        credentials: "include"
+    });
+    const data = await res.json();
+    return data.csrfToken;
 }
 
 function ScoreInputWrapper(props) {
@@ -70,13 +72,15 @@ class App extends React.Component {
       });
   }
 
-  logout() {
+  async logout() {
+    const csrfToken = await fetchCSRFToken();
+
     fetch("https://lapolla-a992dd24e979.herokuapp.com/api/logout_user/", {
         method: "POST",
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken": getCookie("csrftoken")
+            "X-CSRFToken": csrfToken
         }
     })
     .then(res => res.json())

@@ -1,9 +1,11 @@
 import React from 'react'
 
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+async function fetchCSRFToken() {
+    const res = await fetch("https://lapolla-a992dd24e979.herokuapp.com/api/csrf/", {
+        credentials: "include"
+    });
+    const data = await res.json();
+    return data.csrfToken;
 }
 
 class SubmitConfirmation extends React.Component {
@@ -38,13 +40,15 @@ class SubmitConfirmation extends React.Component {
             }
         }
 
+        const csrfToken = await fetchCSRFToken();
+
         // Now submit
         fetch("https://lapolla-a992dd24e979.herokuapp.com/api/sheets/submit/", {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
+                "X-CSRFToken": csrfToken
             },
             body: JSON.stringify({
                 code: code,
