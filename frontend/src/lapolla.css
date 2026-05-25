@@ -68,7 +68,6 @@ button:hover {
     color: black;
     background-color: white;
     border-radius: 15%;
-    margin: 10px;
 }
 .header-team img {
     height: 24px;
@@ -82,9 +81,9 @@ button:hover {
         100px   /* match id */
         300px   /* time */
         300px   /* team 1 */
-        40px    /* home score */
+        50px    /* home score */
         30px    /* v */
-        40px    /* away score */
+        50px    /* away score */
         300px   /* team 2 */
         350px;  /* place */
     align-items: center;
@@ -281,9 +280,9 @@ button:hover {
         display: grid;
         grid-template-columns:
             125px   /* team 1 */
-            45px    /* home score */
+            50px    /* home score */
             30px    /* v */
-            45px    /* away score */
+            50px    /* away score */
             125px;   /* team 2 */
         align-items: center;
         justify-content: center;
