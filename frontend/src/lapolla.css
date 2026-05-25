@@ -40,12 +40,14 @@ button:hover {
 
 /* Left side: "Group A" */
 .group-letter {
-    margin-right: 20px;
     text-align: center;
 }
 
 /* Outer container should stretch naturally */
 .group-teams-outer-container {
+    display: flex;
+    justify-content: space-between; /* pushes left and right apart */
+    align-items: center;
     width: auto;
     max-width: 100%;
 }
