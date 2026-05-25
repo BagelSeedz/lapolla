@@ -22,8 +22,6 @@ class SheetsPage extends React.Component {
         this.createSheet = this.createSheet.bind(this);
         this.goToEditSheet = this.goToEditSheet.bind(this);
         this.unsubmit = this.unsubmit.bind(this);
-        this.showSubmitConfirmation = this.showSubmitConfirmation.bind(this);
-        this.hideSubmitConfirmation = this.hideSubmitConfirmation.bind(this);
         this.markSubmitted = this.markSubmitted.bind(this);
         this.viewSheet = this.viewSheet.bind(this);
     }
@@ -115,20 +113,7 @@ class SheetsPage extends React.Component {
             alert("An error occurred while unsubmitting.");
         });
     }
-
-    showSubmitConfirmation(sheetId) {
-        this.setState((prevState) => ({
-            showSubmitConfirmation: true,
-            submittingSheetId: sheetId
-        })); 
-    }
-
-    hideSubmitConfirmation() {
-        this.setState((prevState) => ({
-            showSubmitConfirmation: false
-        })); 
-    }
-
+    
     markSubmitted(sheetId) {
         this.setState(prev => ({
             mySheets: prev.mySheets.map(s =>
@@ -158,7 +143,6 @@ class SheetsPage extends React.Component {
                                     mine={true}
                                     onEdit={this.goToEditSheet}
                                     onUnsubmit={(id) => this.unsubmit(id)}
-                                    onSubmit={(id) => this.showSubmitConfirmation(id)}
                                     onView={(id) => this.viewSheet(id)}
                                 />
                             ))}
@@ -183,15 +167,6 @@ class SheetsPage extends React.Component {
 
                     </div>
                 </div>
-
-                {this.state.showSubmitConfirmation && (
-                    <SubmitConfirmation 
-                        sheetId={this.state.submittingSheetId} 
-                        onHide={this.hideSubmitConfirmation} 
-                        onSubmitted={() => this.markSubmitted(this.state.submittingSheetId)}
-                        skipSave={true}
-                    />
-                )}
             </>
         );
     }
@@ -213,14 +188,6 @@ class Sheet extends React.Component {
                         <span className="label">Rank:</span> {sheet.rank}
                     </p>
 
-                    {mine && !sheet.submitted && (
-                        <button 
-                            className='sheet-button'
-                            onClick={() => this.props.onSubmit(sheet.id)}
-                        >
-                            Submit
-                        </button>
-                    )}
                     {mine && sheet.submitted && (
                         <button
                             className='sheet-button'
