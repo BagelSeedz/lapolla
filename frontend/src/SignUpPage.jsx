@@ -32,7 +32,7 @@ class SignUpPage extends React.Component {
         const csrfToken = await fetchCSRFToken();
 
         const formData = new FormData(event.target);
-        const username = formData.get("username");
+        const username = formData.get("name");
         const email = formData.get("email");
         const password = formData.get("password");
         const confirmPassword = formData.get("confirm-password")
@@ -79,8 +79,8 @@ class SignUpPage extends React.Component {
                     <h1>Sign Up</h1>
                     {this.state.error != null && <h3>Error: {this.state.error}</h3>}
                     <form onSubmit={this.signup}>
-                        <h4>Username</h4>
-                        <input name="username" type='text' placeholder='Username' />
+                        <h4>Name</h4>
+                        <input name="name" type='text' placeholder='name' />
                         <h4>Email</h4>
                         <input name="email" type='text' placeholder='Email' />
                         <h4>Password</h4>
