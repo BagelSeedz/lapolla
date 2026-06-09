@@ -138,6 +138,9 @@ def predict(request):
         })
 
     elif request.method == "POST":
+        # SCORES LOCKED.
+        return JsonResponse({"success": False, "message": "Scores locked."}, status=403)
+
         body = json.loads(request.body)
         sheet_id = body.get("sheet_id")
         predictions = body.get("predictions")
@@ -204,6 +207,9 @@ def other_sheets(request):
     return JsonResponse({"success": True, "sheets": data})
 
 def create_sheet(request):
+    # SCORES LOCKED.
+    return JsonResponse({"success": False, "message": "Scores locked."}, status=403)
+
     if request.method != "POST":
         return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
 
@@ -231,6 +237,9 @@ def submitted_count(request):
     })
 
 def submit(request):
+    # SCORES LOCKED.
+    return JsonResponse({"success": False, "message": "Scores locked."}, status=403)
+
     if request.method != "POST":
         return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
 
@@ -275,6 +284,9 @@ def submit(request):
     return JsonResponse({"success": True})
 
 def unsubmit(request):
+    # SCORES LOCKED.
+    return JsonResponse({"success": False, "message": "Scores locked."}, status=403)
+
     if request.method != "POST":
         return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
 

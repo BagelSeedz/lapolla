@@ -156,7 +156,7 @@ class SheetsPage extends React.Component {
                             ))}
                         </div>
                         
-                        {this.state.mySheets.length < 2 && <button className="add-sheet-button" onClick={this.createSheet}>+</button>}
+                        {/* {this.state.mySheets.length < 2 && <button className="add-sheet-button" onClick={this.createSheet}>+</button>} */}
                         
                         <h1>_________________</h1>
 
@@ -202,7 +202,7 @@ class Sheet extends React.Component {
                     </button>
 
 
-                    {mine && !sheet.submitted && (
+                    {/* {mine && !sheet.submitted && (
                         <button
                             className="sheet-button"
                             onClick={() => this.props.onEdit(sheet.id)}
@@ -218,7 +218,7 @@ class Sheet extends React.Component {
                         >
                             Unsubmit
                         </button>
-                    )}
+                    )} */}
                 </div>
 
                 <div className="sheet-id">#{sheet.rank}</div>

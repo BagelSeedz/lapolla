@@ -138,11 +138,11 @@ class StartPage extends React.Component {
                                     <h1>LaPolla</h1>
                                     <h2 style={{paddingBottom: '50%'}}>FIFA World Cup 2026</h2>
                                 </div>
-                                <button 
+                                {/* <button 
                                     style={{minWidth: '200px'}}
                                     onClick={this.handleStart}>
                                     Start Score Input
-                                </button>
+                                </button> */}
                             </div>
                             
                         </div>
