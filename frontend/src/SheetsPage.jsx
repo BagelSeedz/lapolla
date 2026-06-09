@@ -183,7 +183,7 @@ class SheetsPage extends React.Component {
 class Sheet extends React.Component {
     render() {
         // const { sheet, mine } = this.props;
-        const { sheet, _ } = this.props;
+        const sheet = this.props.sheet;
 
         return (
             <div className="sheet-card">
