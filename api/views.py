@@ -371,7 +371,6 @@ def announcement(request):
         return JsonResponse({
             "id": ann.id,
             "message": ann.message,
-            "created_at": ann.created_at,
             "created_by": ann.created_by.username if ann.created_by else None
         })
     elif request.method == "POST":
