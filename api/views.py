@@ -366,12 +366,10 @@ def announcement(request):
         ann = Announcement.objects.filter(active=True).order_by("-created_at").first()
 
         if not ann:
-            return JsonResponse({"announcement": None})
+            return JsonResponse({"message": None})
 
         return JsonResponse({
-            "id": ann.id,
             "message": ann.message,
-            "created_by": ann.created_by.username if ann.created_by else None
         })
     elif request.method == "POST":
         if not request.user.is_authenticated:
