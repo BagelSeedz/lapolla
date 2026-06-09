@@ -15,3 +15,18 @@ class Prediction(models.Model):
 
     class Meta:
         unique_together = ('sheet', 'match_id')
+
+class Announcement(models.Model):
+    message = models.TextField()  # long messages allowed
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="announcements"
+    )
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Announcement #{self.id}"

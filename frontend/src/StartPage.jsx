@@ -2,6 +2,7 @@ import React from 'react';
 import './lapolla.css';
 import groups from './Groups.json'
 import teamsJSON from './Teams.json'
+import Announcement from './Announcement';
 
 function getTeamsFromIds(teamIds) {
     var teams = [];
@@ -172,6 +173,8 @@ class StartPage extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <Announcement user={this.props.user}/>
 
                 <div className='large-hide center'>
                     <h1 style={{textAlign: 'center'}}>Groups</h1>

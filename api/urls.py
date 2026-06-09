@@ -25,5 +25,6 @@ urlpatterns = [
     path("sheets/count/", views.submitted_count, name="submitted_count"),
     path("sheets/submit/", views.submit, name="submit"),
     path("sheets/unsubmit/", views.unsubmit, name="unsubmit"),
-    path("sheets/export/<int:sheet_id>/", views.export_sheet, name="export")
+    path("sheets/export/<int:sheet_id>/", views.export_sheet, name="export"),
+    path("announcement/", views.announcement, name="announcement")
 ]

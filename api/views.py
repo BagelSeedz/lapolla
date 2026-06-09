@@ -1,9 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Prediction, Sheet
+from .models import Prediction, Sheet, Announcement
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import HttpResponse
 from openpyxl import load_workbook
 from io import BytesIO
@@ -25,6 +25,7 @@ def me(request):
             "authenticated": True,
             "username": request.user.username,
             "email": request.user.email,
+            "is_staff": request.user.is_staff,
             "firstSheetId": sheet.id if sheet else None
         })
     return JsonResponse({"authenticated": False})
@@ -358,3 +359,43 @@ def export_sheet(request, sheet_id):
     )
     response["Content-Disposition"] = f'attachment; filename="{sheet.user.get_username()}_{sheet_id}.xlsx"'
     return response
+
+@csrf_exempt
+def announcement(request):
+    if request.method == "GET":
+        ann = Announcement.objects.filter(active=True).order_by("-created_at").first()
+
+        if not ann:
+            return JsonResponse({"announcement": None})
+
+        return JsonResponse({
+            "id": ann.id,
+            "message": ann.message,
+            "created_at": ann.created_at,
+            "created_by": ann.created_by.username if ann.created_by else None
+        })
+    elif request.method == "POST":
+        if not request.user.is_authenticated:
+            return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
+
+        if not request.user.is_staff:
+            return JsonResponse({"success": False, "message": "Not authorized"}, status=403)
+
+        try:
+            data = json.loads(request.body)
+        except:
+            return JsonResponse({"success": False, "message": "Invalid JSON"}, status=400)
+
+        message = data.get("message", "").strip()
+        if not message:
+            return JsonResponse({"success": False, "message": "Message cannot be empty"}, status=400)
+
+        ann = Announcement.objects.create(
+            message=message,
+            created_by=request.user,
+            active=True
+        )
+
+        return JsonResponse({"success": True, "id": ann.id})
+
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
