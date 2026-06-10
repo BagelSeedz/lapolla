@@ -1,7 +1,7 @@
 import React from 'react';
 import matches from './Matches.json';
 import teams from './Teams.json';
-import matchTeamIds from '../MatchTeamIds.json';
+import matchTeamIds from './MatchTeamIds.json';
 import Match from './Match';
 
 export function getTeamsForMatch(matchId) {
