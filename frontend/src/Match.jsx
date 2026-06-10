@@ -38,6 +38,8 @@ class Match extends React.Component {
 
     render() {
         const preds = this.props.preds || { home_score: null, away_score: null };
+        const not_editable = this.props.editable === false;
+        const container = not_editable ? "matchdays-container-no-input" : "matchdays-container";
 
         return (
             <>
@@ -45,7 +47,7 @@ class Match extends React.Component {
                     <p className="large-hide no-margin">{this.props.matchData.time}</p>
                 </div>
                 
-                <div className='matchdays-container'>
+                <div className={container}>
                     <p className="small-hide">{this.props.matchData.id}</p>
 
                     <p className="small-hide">{this.props.matchData.time}</p>

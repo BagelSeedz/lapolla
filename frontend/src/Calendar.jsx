@@ -54,9 +54,6 @@ class Calendar extends React.Component {
         });
     }
 
-    // -----------------------------
-    // Flatten Matches.json into a single sorted list
-    // -----------------------------
     flattenAndSortMatches(matchesJson) {
         let list = [];
 
@@ -69,11 +66,8 @@ class Calendar extends React.Component {
             }
         }
 
-        list.sort((a, b) => {
-            const da = new Date(a.time + " 2026");
-            const db = new Date(b.time + " 2026");
-            return da - db;
-        });
+        // Sort by match ID (already chronological)
+        list.sort((a, b) => a.id - b.id);
 
         return list;
     }
