@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Prediction, Sheet, Announcement
+from .models import Prediction, Sheet, Announcement, Score
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
@@ -394,5 +394,55 @@ def announcement(request):
         )
 
         return JsonResponse({"success": True, "id": ann.id})
+
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+@csrf_exempt
+def scores(request):
+    if request.method == "GET":
+        scores = Score.objects.all()
+        result = {}
+
+        for s in scores:
+            result[s.match_id] = {
+                "home_score": s.home_score,
+                "away_score": s.away_score
+            }
+
+        # Fill missing matches with None
+        for match_id in range(1, 73):
+            if match_id not in result:
+                result[match_id] = None
+
+        return JsonResponse({"success": True, "scores": result})
+
+    elif request.method == "PUT":
+        if not request.user.is_authenticated:
+            return JsonResponse({"success": False, "message": "Not authenticated"}, status=403)
+
+        if not request.user.is_staff:
+            return JsonResponse({"success": False, "message": "Not authorized"}, status=403)
+
+        try:
+            data = json.loads(request.body)
+        except:
+            return JsonResponse({"success": False, "message": "Invalid JSON"}, status=400)
+
+        new_scores = data.get("scores")
+        if not new_scores:
+            return JsonResponse({"success": False, "message": "Scores cannot be empty"}, status=400)
+
+        for match_id_str, score_data in new_scores.items():
+            match_id = int(match_id_str)
+
+            Score.objects.update_or_create(
+                match_id=match_id,
+                defaults={
+                    "home_score": score_data["home_score"],
+                    "away_score": score_data["away_score"]
+                }
+            )
+
+        return JsonResponse({"success": True})
 
     return JsonResponse({"success": False, "message": "Invalid request"}, status=400)

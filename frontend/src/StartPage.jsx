@@ -3,6 +3,7 @@ import './lapolla.css';
 import groups from './Groups.json'
 import teamsJSON from './Teams.json'
 import Announcement from './Announcement';
+import Calendar from './Calendar';
 
 function getTeamsFromIds(teamIds) {
     var teams = [];
@@ -203,6 +204,8 @@ class StartPage extends React.Component {
                         <Group letter='L' color='#BA55D3'/>
                     </div>
                 </div>
+
+                <Calendar user={this.props.user}/>
             </>
         );
     }

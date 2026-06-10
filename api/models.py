@@ -30,3 +30,8 @@ class Announcement(models.Model):
 
     def __str__(self):
         return f"Announcement #{self.id}"
+
+class Score(models.Model):
+    match_id = models.IntegerField()
+    home_score = models.IntegerField(null=True, blank=True)
+    away_score = models.IntegerField(null=True, blank=True)
