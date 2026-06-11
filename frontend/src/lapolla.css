@@ -306,6 +306,18 @@ button:hover {
         font-size: 30px;
         margin-top: 0px;
     }
+    .matchdays-container {
+        display: grid;
+        grid-template-columns:
+            125px   /* team 1 */
+            30px    /* v */
+            125px;   /* team 2 */
+        align-items: center;
+        justify-content: center;
+        column-gap: 5px;
+        font-size: 30px;
+        margin-top: 0px;
+    }
     .prize-pool-container h1 {
         font-size: xx-large;
     }
