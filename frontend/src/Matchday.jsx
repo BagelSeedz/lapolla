@@ -26,7 +26,6 @@ class Matchday extends React.Component {
                     team2={team2}
                     matchData={this.props.matchData[0]}
                     preds={match1Preds}
-                    editable={true}
                     onEditScore={this.props.onEditScore}
                 />
                 <Match
@@ -35,7 +34,6 @@ class Matchday extends React.Component {
                     team2={team4}
                     matchData={this.props.matchData[1]}
                     preds={match2Preds}
-                    editable={true}
                     onEditScore={this.props.onEditScore}
                 />
             </>
