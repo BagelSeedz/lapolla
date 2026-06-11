@@ -207,6 +207,7 @@ class StartPage extends React.Component {
                 
                 <div className='center'>
                     <div>
+                        <h1 style={{textAlign: 'center'}}>Calendar</h1>
                         <Calendar user={this.props.user}/>
                     </div>
                 </div>
