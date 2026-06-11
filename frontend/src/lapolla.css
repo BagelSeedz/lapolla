@@ -306,7 +306,7 @@ button:hover {
         font-size: 30px;
         margin-top: 0px;
     }
-    .matchdays-container {
+    .matchdays-container-no-input {
         display: grid;
         grid-template-columns:
             125px   /* team 1 */
