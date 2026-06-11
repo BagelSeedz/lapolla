@@ -174,8 +174,13 @@ class StartPage extends React.Component {
                         </div>
                     </div>
                 </div>
-
-                <Announcement user={this.props.user}/>
+                
+                <div className='center'>
+                    <div>
+                        <h1 style={{textAlign: 'center'}}>Calendar</h1>
+                        <Announcement user={this.props.user}/>
+                    </div>
+                </div>
 
                 <div className='large-hide center'>
                     <h1 style={{textAlign: 'center'}}>Groups</h1>

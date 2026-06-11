@@ -93,21 +93,6 @@ button:hover {
     font-size: 30px;
     margin-top: 10px;
 }
-.matchdays-container-no-input {
-    display: grid;
-    grid-template-columns:
-        100px   /* match id */
-        300px   /* time */
-        300px   /* team 1 */
-        30px    /* v */
-        300px   /* team 2 */
-        350px;  /* place */
-    align-items: center;
-    justify-content: center;
-    column-gap: 10px;
-    font-size: 30px;
-    margin-top: 10px;
-}
 .matchdays-container p{
     margin: 0;
 }
@@ -299,18 +284,6 @@ button:hover {
             50px    /* home score */
             30px    /* v */
             50px    /* away score */
-            125px;   /* team 2 */
-        align-items: center;
-        justify-content: center;
-        column-gap: 5px;
-        font-size: 30px;
-        margin-top: 0px;
-    }
-    .matchdays-container-no-input {
-        display: grid;
-        grid-template-columns:
-            125px   /* team 1 */
-            30px    /* v */
             125px;   /* team 2 */
         align-items: center;
         justify-content: center;
