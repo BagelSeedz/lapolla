@@ -174,13 +174,8 @@ class StartPage extends React.Component {
                         </div>
                     </div>
                 </div>
-                
-                <div className='center'>
-                    <div>
-                        <h1 style={{textAlign: 'center'}}>Calendar</h1>
-                        <Announcement user={this.props.user}/>
-                    </div>
-                </div>
+
+                <Announcement user={this.props.user}/>
 
                 <div className='large-hide center'>
                     <h1 style={{textAlign: 'center'}}>Groups</h1>
@@ -209,8 +204,12 @@ class StartPage extends React.Component {
                         <Group letter='L' color='#BA55D3'/>
                     </div>
                 </div>
-
-                <Calendar user={this.props.user}/>
+                
+                <div className='center'>
+                    <div>
+                        <Calendar user={this.props.user}/>
+                    </div>
+                </div>
             </>
         );
     }
