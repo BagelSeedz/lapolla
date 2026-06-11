@@ -99,9 +99,7 @@ button:hover {
         100px   /* match id */
         300px   /* time */
         300px   /* team 1 */
-        50px    /* home score */
         30px    /* v */
-        50px    /* away score */
         300px   /* team 2 */
         350px;  /* place */
     align-items: center;

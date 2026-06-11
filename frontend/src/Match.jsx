@@ -54,25 +54,29 @@ class Match extends React.Component {
 
                     <Team team={this.props.team1}/>
 
-                    <input
-                        className='score-input'
-                        type="number"
-                        min="0"
-                        max="99"
-                        value={preds.home_score}
-                        onChange={this.updateTeam1Score}
-                    />
+                    {!not_editable &&
+                        <input
+                            className='score-input'
+                            type="number"
+                            min="0"
+                            max="99"
+                            value={preds.home_score}
+                            onChange={this.updateTeam1Score}
+                        />
+                    }
 
                     <p className="versus">v</p>
-
-                    <input
-                        className='score-input'
-                        type="number"
-                        min="0"
-                        max="99"
-                        value={preds.away_score}
-                        onChange={this.updateTeam2Score}
-                    />
+                    
+                    {!not_editable &&
+                        <input
+                            className='score-input'
+                            type="number"
+                            min="0"
+                            max="99"
+                            value={preds.away_score}
+                            onChange={this.updateTeam2Score}
+                        />
+                    }
 
                     <Team team={this.props.team2}/>
 

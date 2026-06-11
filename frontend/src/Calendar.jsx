@@ -160,7 +160,7 @@ class Calendar extends React.Component {
                             matchData={match}
                             preds={preds}
                             editable={is_staff}
-                            onEditScore={(h, a) => is_staff && this.onEditScore(matchId, h, a)}
+                            onEditScore={is_staff ? this.onEditScore : () => {}}
                         />
                     );
                 })}
