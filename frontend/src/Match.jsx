@@ -39,7 +39,7 @@ class Match extends React.Component {
     render() {
         const preds = this.props.preds || { home_score: null, away_score: null };
         const editable = this.props.editable;
-        const container = editable ? "matchdays-container-no-input" : "matchdays-container";
+        const container = !editable ? "matchdays-container-no-input" : "matchdays-container";
 
         return (
             <>
