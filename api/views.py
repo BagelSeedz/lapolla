@@ -435,11 +435,29 @@ def scores(request):
         for match_id_str, score_data in new_scores.items():
             match_id = int(match_id_str)
 
+            # Skip if score_data is None or empty
+            if not score_data:
+                continue
+
+            home = score_data.get("home_score")
+            away = score_data.get("away_score")
+
+            # Skip if either score is missing or empty string
+            if home in [None, ""] or away in [None, ""]:
+                continue
+
+            # Convert to int safely
+            try:
+                home = int(home)
+                away = int(away)
+            except ValueError:
+                continue
+
             Score.objects.update_or_create(
                 match_id=match_id,
                 defaults={
-                    "home_score": score_data["home_score"],
-                    "away_score": score_data["away_score"]
+                    "home_score": home,
+                    "away_score": away
                 }
             )
 
