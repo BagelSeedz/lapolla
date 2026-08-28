@@ -156,7 +156,7 @@ class SheetsPage extends React.Component {
                             ))}
                         </div>
                         
-                        {/* {this.state.mySheets.length < 2 && <button className="add-sheet-button" onClick={this.createSheet}>+</button>} */}
+                        {this.state.mySheets.length < 2 && <button className="add-sheet-button" onClick={this.createSheet}>+</button>}
                         
                         <h1>_________________</h1>
 
@@ -182,8 +182,8 @@ class SheetsPage extends React.Component {
 
 class Sheet extends React.Component {
     render() {
-        // const { sheet, mine } = this.props;
         const sheet = this.props.sheet;
+        const mine = this.props.mine;
 
         return (
             <div className="sheet-card">
@@ -203,7 +203,7 @@ class Sheet extends React.Component {
                     </button>
 
 
-                    {/* {mine && !sheet.submitted && (
+                    {mine && !sheet.submitted && (
                         <button
                             className="sheet-button"
                             onClick={() => this.props.onEdit(sheet.id)}
@@ -219,7 +219,7 @@ class Sheet extends React.Component {
                         >
                             Unsubmit
                         </button>
-                    )} */}
+                    )}
                 </div>
 
                 <div className="sheet-id">#{sheet.rank}</div>

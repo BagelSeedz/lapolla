@@ -185,7 +185,7 @@ class ScoreInputPage extends React.Component {
 
     render() {
         // SCORES LOCKED.
-        window.location.hash = "sheets";
+        // window.location.hash = "sheets";
 
         if (!this.props.user.authenticated)
             window.location.hash = "login";
